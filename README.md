@@ -1,4 +1,4 @@
 pootle
 ======
 
-Pootle Android Arayüzü
+Pootle Mobil Uygulama
