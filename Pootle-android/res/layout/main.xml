@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:id="@+id/loginlable"
+              android:background="@android:color/holo_blue_light" android:weightSum="1">
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/start"
+            android:gravity="center"
+            android:textSize="30dp" android:editable="false" android:id="@+id/textview" android:layout_weight="0.11"
+            android:textColor="@android:color/white"/>
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/username"
+            android:id="@+id/textView" android:textSize="20dp" android:textColor="@android:color/white"/>
+    <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_weight="0.03">
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="49dp"
+                android:id="@+id/username"
+                android:layout_weight="0.90"
+                android:background="#ffffffff"/>
+    </TableRow>
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/passwd"
+            android:id="@+id/textView2" android:textSize="20dp" android:textColor="@android:color/white"/>
+    <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_weight="0.04">
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="49dp"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/passwd"
+                android:layout_weight="1"
+                android:background="#ffffffff"/>
+    </TableRow>
+    <TextView
+            android:layout_width="272dp"
+            android:layout_height="wrap_content"
+            android:text="@string/server"
+            android:id="@+id/textView3" android:textSize="20dp" android:textColor="@android:color/white"/>
+    <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_weight="0.05">
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="49dp"
+                android:id="@+id/server"
+                android:layout_weight="1"
+                android:background="#ffffffff"/>
+    </TableRow>
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/remember"
+            android:id="@+id/checkBox" android:layout_weight="0.11" android:checked="false"
+            android:layout_gravity="center_horizontal" android:textSize="20dp"
+            android:textColor="@android:color/white"/>
+
+android:background="#57686665" android:layout_weight="0.27"/>
+    <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_weight="0.27" android:orientation="vertical"
+            android:id="@+id/tablerow" android:weightSum="1">
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:text="@string/login"
+                android:id="@+id/button2"
+                android:onClick="baglan"
+                android:gravity="center"
+
+                android:textSize="30dp" android:textColor="#ffffffff"/>
+    </TableRow>
+
+</LinearLayout>
+
