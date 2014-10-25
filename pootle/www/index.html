@@ -1,34 +1,83 @@
-<script type = "text/javascript">
-var  strURL = "http://api.ozdincer.com:8000/accounts/login/?next=%2F"
+<!DOCTYPE html>
 
-function validate() {
-if(document.getElementById("username").value == "" || document.getElementById("password").value == "" )
-	{
-		alert('Fill out both username and password, please...');
-		return false;
-	}
-	var xhr = window.ActiveXObject ? new ActiveXObject("Microsoft.XMLHTTP") : new XMLHttpRequest();
-	xhr.open("GET",strURL,true, document.getElementById("username").value, document.getElementById("password").value);
-	xhr.send("");
-	if (xhr.status == 200) 
-	{
-		alert("success");
-	}
-	else
-	{
-		alert('Wrong credentials...');
-		
-	}
-	return false;
-}
+<html lang="tr" dir="ltr">
+
+  <head>
+
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,mozilla=1">
+
+    <title>Pootle Login Girişi</title>    
+
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+
+		<script type="text/javascript">
+
+		function login()
+
+		{
+
+			if(document.getElementById("username").value == "" || document.getElementById("password").value == "" )
+
+			{
+
+				alert("kullanıcı adı ve parolayı giriniz");
+
+				return true;
+
+			}
+
+			var xhr = window.ActiveXObject ? new ActiveXObject("Microsoft.XMLHTTP") : new XMLHttpRequest();
+
+			xhr.open("GET", "http://api.ozdincer.com:8000/api/v1/", true, document.getElementById("username").value, document.getElementById("password").value);
+
+			xhr.send("");
+
+			if (xhr.status == 200) 
+
+			{
+
+					alert("GİRİŞ YAPILIYOR...");
+
+				document.getElementById("console").innerHTML = xhr.responseText;
+
+			}
+
+			else
+
+			{
+
+				alert("hatalı giriş");
+
+				document.getElementById("console").innerHTML = xhr.responseText;
+
+			}
+
+			return false;
+
+		}
+
+	</script>
 
 
-</script>
 
-<form name = "myform">
-<p>ENTER USER NAME <input type="text" name="username" id="username"> 
-	ENTER PASSWORD <input type="password" name="password"id="password">
-<input type="button" value="Check In" name="Submit" onclick= "validate()">
-</p>
+</head>
 
-</form>
+<body>
+
+<form id="login" method="POST" onsubmit="return login()">
+
+			kullanıcı adı: <input id="username" value="username" /><br />
+
+			parola:        <input type="password" value="password" id="password" /><br />
+
+			<input type="submit" value="Giriş yap" />
+
+		</form>
+
+		<span id="console"></span>
+
+</body>
+
+</html>
