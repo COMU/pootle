@@ -1,0 +1,34 @@
+<script type = "text/javascript">
+var  strURL = "http://api.ozdincer.com:8000/accounts/login/?next=%2F"
+
+function validate() {
+if(document.getElementById("username").value == "" || document.getElementById("password").value == "" )
+	{
+		alert('Fill out both username and password, please...');
+		return false;
+	}
+	var xhr = window.ActiveXObject ? new ActiveXObject("Microsoft.XMLHTTP") : new XMLHttpRequest();
+	xhr.open("GET",strURL,true, document.getElementById("username").value, document.getElementById("password").value);
+	xhr.send("");
+	if (xhr.status == 200) 
+	{
+		alert("success");
+	}
+	else
+	{
+		alert('Wrong credentials...');
+		
+	}
+	return false;
+}
+
+
+</script>
+
+<form name = "myform">
+<p>ENTER USER NAME <input type="text" name="username" id="username"> 
+	ENTER PASSWORD <input type="password" name="password"id="password">
+<input type="button" value="Check In" name="Submit" onclick= "validate()">
+</p>
+
+</form>
