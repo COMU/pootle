@@ -63,7 +63,7 @@ function login() {
 
     $.ajax({
         type: "GET",
-        url: "http://api.ozdincer.com:8000/api/v1/projects/",
+        url: "http://api.ozdincer.com:8000/api/v1/languages/",
         dataType: 'json',
         async: false,
         data: '{}',
@@ -75,6 +75,7 @@ function login() {
             window.location.hash = '#projectsPage';
             console.log(data)
             projects = data.objects;
+
         },
         error: function() {
             alert('Kullanıcı adı veya parola hatalı.')
@@ -82,15 +83,30 @@ function login() {
     });
 
     $(document).on("pageshow","#projectsPage",function() {
-        var markup = '<ol>';
-
+        var markup = '<ul data-role="listview" data-theme="b">';
         for (var i = 0; i < projects.length; i++) {
-            markup += '<li> ' + (i + 1) + ' - ' + projects[i].fullname + ' </li>';
+            markup += '<li> <a href="#">' + (i + 1) + ' - ' + projects[i].translation_projects + ' </a></li>';
         }
 
-        markup += '</ol>';
+        markup += '</ul>';
 
-        $('#Projects_Content').html(markup);
+       $('#Projects_Content').html(markup);
+
+
 
     });
+    $(document).on("pageshow","#projectsPage",function() {
+        var markup = '<ul data-role="listview" data-theme="b">';
+        for (var i = 0; i < projects.length; i++) {
+            markup += '<li> <a href="#" >' + (i + 1) + ' - ' + projects[i].fullname + '</a> </li>';
+        }
+
+        markup += '</ul>';
+
+        $('#Languages_Content').html(markup);
+
+
+
+    });
+
 }
