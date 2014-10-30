@@ -72,7 +72,7 @@ function login() {
         },
         success: function(data){
             alert('Başarıyla giriş yaptınız.');
-            window.location.hash = '#projectsPage';
+            window.location.hash = '#languagesPage';
             console.log(data)
             projects = data.objects;
 
@@ -82,20 +82,7 @@ function login() {
         }
     });
 
-    $(document).on("pageshow","#projectsPage",function() {
-        var markup = '<ul data-role="listview" data-theme="b">';
-        for (var i = 0; i < projects.length; i++) {
-            markup += '<li> <a href="#">' + (i + 1) + ' - ' + projects[i].translation_projects + ' </a></li>';
-        }
-
-        markup += '</ul>';
-
-       $('#Projects_Content').html(markup);
-
-
-
-    });
-    $(document).on("pageshow","#projectsPage",function() {
+    $(document).on("pageshow","#languagesPage",function() {
         var markup = '<ul data-role="listview" data-theme="b">';
         for (var i = 0; i < projects.length; i++) {
             markup += '<li> <a href="#" >' + (i + 1) + ' - ' + projects[i].fullname + '</a> </li>';
