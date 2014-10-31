@@ -1,83 +1,49 @@
-<!DOCTYPE html>
-
-<html lang="tr" dir="ltr">
-
-  <head>
-
+﻿    <!DOCTYPE html>
+    <html>
+    <head>
     <meta charset="utf-8">
-
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,mozilla=1">
-
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Pootle Login Girişi</title>    
-
     <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-
 		<script type="text/javascript">
-
 		function login()
-
 		{
-
+			var xhr;
+			if (window.XMLHttpRequest) {
+				//Firefox, Opera, IE7, and other browsers will use the native object
+				xhr = new XMLHttpRequest();
+			}else{
+				//IE 5 and 6 will use the ActiveX control
+				xhr = new ActiveXObject("Microsoft.XMLHTTP");
+			}
 			if(document.getElementById("username").value == "" || document.getElementById("password").value == "" )
-
+				{
+					alert('kullanıcı adı ve parolayı giriniz');
+					return false;
+				}
+                       
+         	xhr.onreadystatechange=function()
 			{
-
-				alert("kullanıcı adı ve parolayı giriniz");
-
-				return true;
-
+				if (xhr.readyState==4){
+					alert('Giriş Yapıldı...');
+					document.getElementById("console").innerHTML = xhr.responseText;
+				}
+				else{
+					alert('hatalı giriş');
+					document.getElementById("console").innerHTML = xhr.responseText;
+				}
 			}
-
-			var xhr = window.ActiveXObject ? new ActiveXObject("Microsoft.XMLHTTP") : new XMLHttpRequest();
-
-			xhr.open("GET", "http://api.ozdincer.com:8000/api/v1/", true, document.getElementById("username").value, document.getElementById("password").value);
-
+			 xhr.open("GET", "http://api.ozdincer.com:8000/api/v1/languages/", true, document.getElementById("username").value, document.getElementById("password").value);
 			xhr.send("");
-
-			if (xhr.status == 200) 
-
-			{
-
-					alert("GİRİŞ YAPILIYOR...");
-
-				document.getElementById("console").innerHTML = xhr.responseText;
-
 			}
-
-			else
-
-			{
-
-				alert("hatalı giriş");
-
-				document.getElementById("console").innerHTML = xhr.responseText;
-
-			}
-
-			return false;
-
-		}
-
 	</script>
-
-
-
-</head>
-
-<body>
-
-<form id="login" method="POST" onsubmit="return login()">
-
-			kullanıcı adı: <input id="username" value="username" /><br />
-
-			parola:        <input type="password" value="password" id="password" /><br />
-
+    </head>
+    <body>
+    <form id="login" onsubmit="return login()">
+			kullanıcı adı: <input id="username" value="" /><br />
+			parola:        <input type="password" value="" id="password" /><br />
 			<input type="submit" value="Giriş yap" />
-
 		</form>
-
 		<span id="console"></span>
-
-</body>
-
-</html>
+    </body>
+    </html>
