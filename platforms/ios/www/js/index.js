@@ -48,8 +48,8 @@ var app = {
     }
 };
 
-function login() {
-    var username = document.getElementById("username").value;
+function startApp() {
+    /*var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
 
     // Kaynak: http://stackoverflow.com/questions/5507234/how-to-use-basic-auth-and-jquery-and-ajax
@@ -64,7 +64,7 @@ function login() {
     $.ajax({
         type: "GET",
         url: "http://api.ozdincer.com:8000/api/v1/languages/",
-        dataType: 'json',
+        dataType: 'jsonp',
         async: false,
         data: '{}',
         beforeSend: function(xhr){
@@ -80,20 +80,50 @@ function login() {
         error: function() {
             alert('Kullanıcı adı veya parola hatalı.')
         }
-    });
+    });*/
 
-    $(document).on("pageshow","#languagesPage",function() {
+    request('http://api.ozdincer.com:8000/api/v1/languages/', function(data){
+        alert('Başarıyla giriş yaptınız.');
+        window.location.hash = '#languagesPage';
+        console.log(data)
+        projects = data.objects;
+
+    }, function() {
+        alert('Kullanıcı adı veya parola hatalı.')});
+
+
+        $(document).on("pageshow","#languagesPage",function() {
         var markup = '<ul data-role="listview" data-theme="b">';
         for (var i = 0; i < projects.length; i++) {
-            markup += '<li> <a href="#" >' + (i + 1) + ' - ' + projects[i].fullname + '</a> </li>';
+            markup += '<li> <a href="#'+projects[i].code+'" >' + (i + 1) + ' - ' + projects[i].fullname + '</a> </li>';
         }
 
         markup += '</ul>';
-
         $('#Languages_Content').html(markup);
-
-
-
     });
 
 }
+
+function request(url, successCallback, errorCallback) {
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+    $.ajax({
+        type: "GET",
+        url: url,
+        dataType: 'json',
+        async: false,
+        data: '{}',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', make_base_auth(username, password));
+        },
+        success: successCallback,
+        error: errorCallback
+    });
+
+    function make_base_auth(user, password) {
+        var tok = user + ':' + password;
+        var hash = btoa(tok);
+        return "Basic " + hash;
+    };
+}
+
