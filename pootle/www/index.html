@@ -24,7 +24,7 @@
                        
          	xhr.onreadystatechange=function()
 			{
-				if (xhr.readyState==4){
+				if (xhr.status == 200){
 					alert('Giriş Yapıldı...');
 					document.getElementById("console").innerHTML = xhr.responseText;
 				}
