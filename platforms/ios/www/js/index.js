@@ -49,40 +49,8 @@ var app = {
 };
 
 function startApp() {
-    /*var username = document.getElementById("username").value;
-    var password = document.getElementById("password").value;
 
-    // Kaynak: http://stackoverflow.com/questions/5507234/how-to-use-basic-auth-and-jquery-and-ajax
-    function make_base_auth(user, password) {
-        var tok = user + ':' + password;
-        var hash = btoa(tok);
-        return "Basic " + hash;
-    }
-
-    var projects = {};
-
-    $.ajax({
-        type: "GET",
-        url: "http://api.ozdincer.com:8000/api/v1/languages/",
-        dataType: 'jsonp',
-        async: false,
-        data: '{}',
-        beforeSend: function(xhr){
-            xhr.setRequestHeader('Authorization', make_base_auth(username, password));
-        },
-        success: function(data){
-            alert('Başarıyla giriş yaptınız.');
-            window.location.hash = '#languagesPage';
-            console.log(data)
-            projects = data.objects;
-
-        },
-        error: function() {
-            alert('Kullanıcı adı veya parola hatalı.')
-        }
-    });*/
-
-    request('http://api.ozdincer.com:8000/api/v1/languages/', function(data){
+    request('http://api.ozdincer.com/api/v1/languages/', function(data){
         alert('Başarıyla giriş yaptınız.');
         window.location.hash = '#languagesPage';
         console.log(data)
@@ -92,17 +60,39 @@ function startApp() {
         alert('Kullanıcı adı veya parola hatalı.')});
 
 
-        $(document).on("pageshow","#languagesPage",function() {
+    var selectedlanguage = '';
+
+    $(document).on("pageshow","#languagesPage",function() {
         var markup = '<ul data-role="listview" data-theme="b">';
         for (var i = 0; i < projects.length; i++) {
-            markup += '<li> <a href="#'+projects[i].code+'" >' + (i + 1) + ' - ' + projects[i].fullname + '</a> </li>';
+            markup += '<li> <a class="language" data-code="'+ projects[i].code +'"'+' >' + (i + 1) + ' - ' + projects[i].fullname + '</a> </li>';
         }
 
         markup += '</ul>';
         $('#Languages_Content').html(markup);
+
+        $('a.language').on("tap", function() {
+            selectedlanguage = $(this).attr("data-code");
+            $.mobile.changePage( "#projectsPage");
+        });
+    });
+
+    $(document).on("pageshow","#projectsPage",function() {
+
+        var markup = '<ul data-role="listview" data-theme="b">';
+        for (var i = 0; i < selectedlanguage.length; i++) {
+            for(j=0;j<(projects[i].translation_projects).length;j++) {
+                markup += '<li> <a href="#"' + ' >' + (i + 1) + ' - ' + projects[i].translation_projects[j] + '</a> </li>';
+            }
+            markup += '</ul>';
+        }
+
+
+        $('#Projects_Content').html(markup);
     });
 
 }
+
 
 function request(url, successCallback, errorCallback) {
     var username = document.getElementById("username").value;
