@@ -50,7 +50,7 @@ var app = {
 
 function startApp() {
 
-    login_request('http://api.ozdincer.com/api/v1/languages/', function(data){
+    request('http://api.ozdincer.com/api/v1/languages/', function(data){
         alert('Başarıyla giriş yaptınız.');
         window.location.hash = '#languagesPage';
         console.log(data)
@@ -61,7 +61,6 @@ function startApp() {
 
 
     var selectedlanguage = '';
-    var project = [];
 
     $(document).on("pageshow","#languagesPage",function() {
         var markup = '<ul data-role="listview" data-theme="b">';
@@ -81,6 +80,7 @@ function startApp() {
 
     $(document).on("pageshow","#projectsPage",function() {
         selectedlanguage = selectedlanguage.split(",");
+        var project = [];
 
         for(var j=0; j<selectedlanguage.length;j++) {
 
@@ -113,13 +113,13 @@ function startApp() {
 }
 
 
-function login_request(url, successCallback, errorCallback) {
+function request(url, successCallback, errorCallback) {
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
     $.ajax({
         type: "GET",
         url: url,
-        dataType: 'jsonp',
+        dataType: 'json',
         async: false,
         data: '{}',
         beforeSend: function (xhr) {
@@ -136,18 +136,4 @@ function login_request(url, successCallback, errorCallback) {
     };
 }
 
-function request(url, successCallback, errorCallback) {
-
-    $.ajax({
-        type: "GET",
-        url: url,
-        dataType: 'jsonp',
-        async: false,
-        data: '{}',
-
-        success: successCallback,
-        error: errorCallback
-    });
-
-}
 
