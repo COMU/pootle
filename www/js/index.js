@@ -50,7 +50,7 @@ var app = {
 
 function startApp() {
 
-    request('http://api.ozdincer.com/api/v1/languages/', function(data){
+    login_request('http://api.ozdincer.com/api/v1/languages/', function(data){
         alert('Başarıyla giriş yaptınız.');
         window.location.hash = '#languagesPage';
         console.log(data)
@@ -61,11 +61,12 @@ function startApp() {
 
 
     var selectedlanguage = '';
+    var project = [];
 
     $(document).on("pageshow","#languagesPage",function() {
         var markup = '<ul data-role="listview" data-theme="b">';
         for (var i = 0; i < projects.length; i++) {
-            markup += '<li> <a class="language" data-code="'+ projects[i].code +'"'+' >' + (i + 1) + ' - ' + projects[i].fullname + '</a> </li>';
+            markup += '<li> <a class="language" data-code="'+ projects[i].translation_projects +'"'+' >' + (i + 1) + ' - ' + projects[i].fullname + '</a> </li>';
         }
 
         markup += '</ul>';
@@ -77,30 +78,48 @@ function startApp() {
         });
     });
 
-    $(document).on("pageshow","#projectsPage",function() {
 
-        var markup = '<ul data-role="listview" data-theme="b">';
-        for (var i = 0; i < selectedlanguage.length; i++) {
-            for(j=0;j<(projects[i].translation_projects).length;j++) {
-                markup += '<li> <a href="#"' + ' >' + (i + 1) + ' - ' + projects[i].translation_projects[j] + '</a> </li>';
-            }
-            markup += '</ul>';
+    $(document).on("pageshow","#projectsPage",function() {
+        selectedlanguage = selectedlanguage.split(",");
+
+        for(var j=0; j<selectedlanguage.length;j++) {
+
+            url="http://api.ozdincer.com" + selectedlanguage[j];
+            request(url, function (data) {
+
+                project.push((data.pootle_path));
+                console.log(project);
+                var markup = '<ul data-role="listview" data-theme="b">';
+                for (var i = 0; i < project.length; i++) {
+                    pootle_path = project[i].split("/")[2];
+                    markup += '<li> <a href="#"' + ' >' + (i + 1) + ' - ' + pootle_path + '</a> </li>';
+
+                }
+
+                markup += '</ul>';
+                $('#Projects_Content').html(markup);
+
+            }, function () {
+                alert('olmadi')
+            });
+
+            console.log(selectedlanguage);
         }
 
-
-        $('#Projects_Content').html(markup);
     });
+
+
 
 }
 
 
-function request(url, successCallback, errorCallback) {
+function login_request(url, successCallback, errorCallback) {
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
     $.ajax({
         type: "GET",
         url: url,
-        dataType: 'json',
+        dataType: 'jsonp',
         async: false,
         data: '{}',
         beforeSend: function (xhr) {
@@ -115,5 +134,20 @@ function request(url, successCallback, errorCallback) {
         var hash = btoa(tok);
         return "Basic " + hash;
     };
+}
+
+function request(url, successCallback, errorCallback) {
+
+    $.ajax({
+        type: "GET",
+        url: url,
+        dataType: 'jsonp',
+        async: false,
+        data: '{}',
+
+        success: successCallback,
+        error: errorCallback
+    });
+
 }
 
