@@ -1,0 +1,97 @@
+body{
+	margin:0;
+}
+
+p, li > p {
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+#inputs{
+	width:100%;
+	
+}
+.form-control{
+	width:80%;
+}
+
+#res_card{
+	background-color:white;
+}
+
+.input{
+	margin-top:1rem;
+	margin-left:10%;
+	margin-right:10%;
+	padding:1.5rem 2.5rem;
+	font-size: 1rem;
+	width:80%;
+	
+}
+a {
+	text-decoration: none;
+	color: #000;
+}
+
+#submit{
+	padding:1.5rem;
+	color:white;
+	margin-left:10%;
+	margin-right:10%;
+}
+
+.title{
+	font-size:0.8rem;
+	color:#000;
+	font-weight: 500;
+}
+
+#about_page{
+	padding:0 0.4rem;
+}
+
+#gitfeed{
+	padding:1rem 2rem;
+	margin:auto;
+	display:block;
+}
+
+.link{
+	color:#2574a9;
+	text-decoration: underline;
+}
+
+.link:hover{
+	color:#3498db;
+	text-decoration: underline;
+}
+
+.commit {
+	padding: 0 0.4rem;
+}
+
+/*Color Adjust*/
+
+.borderBlue{
+	border-bottom: 0.1rem solid #2574a9;
+}
+
+.colorBlue{
+	color: #2574a9;
+	background: #2574a9;
+	background-color: #2574a9;
+}
+
+.listheaderBlue{
+	color: #2574a9;
+}
+
+.linkBlue:hover{
+	background-color: #1e8bc3;
+}
+
+.buttonBlue{
+	background-color:#59abe3;
+	border:1px solid #3498db;
+	color:white;
+}

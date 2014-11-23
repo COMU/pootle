@@ -1,0 +1,147 @@
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, user-scalable=no" />
+		<script src='js/jquery-2.1.0.min.js'></script>
+		<script src='js/brick-1.0.1.js'></script>
+		<script src='js/localStorage.js'></script>
+		<script src='js/script.js'></script>
+		
+		<link type='text/css' href='style/lists.css' rel="stylesheet">
+		<link type='text/css' href='style/toolbars.css' rel="stylesheet">
+		<link type='text/css' href='style/headers.css' rel="stylesheet">
+		<link type='text/css' href='style/brick-1.0.1.css' rel="stylesheet">
+		<link type='text/css' href='style/style.css' rel="stylesheet">
+		<link type='text/css' href='style/octicons.css' rel="stylesheet"> 
+	</head>
+	<body>	
+		<x-deck>
+			<x-card id='search_card' selected transition="show">
+				<x-layout id='search_layout'>
+					<header class='top-menu colorBlue'>
+						<button disabled></button>
+						
+						<h1>POOTLE LOGIN</h1>
+					</header>
+					<section id='search_section'>
+						<div id='inputs'>
+							<input name='username' placeholder='Usernames' class='input form-control'>
+							<input name='password' placeholder='Passwords' class='input form-control' input type='password'>
+							
+							<button id='submit' class='btn-success input buttonBlue' >LOGIN</button>
+						</div>
+					</section>
+					
+				</x-layout>
+			</x-card>
+					
+			<x-card id='res_card' transition-type='slide-right'>
+				<x-layout id='res_layout'>
+					<header class='top-menu colorBlue'>
+						<button class='toSearch'><span class="mega-octicon octicon-search"></span></button>
+						<menu type="toolbar">
+						    <button id='star_this'><span class="mega-octicon octicon-star"></span></button>
+						</menu>
+						<h1 id='repo'></h1>
+					</header>
+					<section id='res_section'>
+						<div id='reslist' data-type='list'>
+						</div>
+					</section>
+					<footer role="toolbar" class='colorBlue'>
+						  <ul>
+							<li><a href='#' class='toStarred linkBlue'>Bookmarks</a></li>
+						  </ul>
+						  <ul>
+							<li><a href='#' class='toHistory linkBlue'>History</a></li>
+						  </ul>
+					</footer>
+				</x-layout>
+			</x-card>
+			
+			<x-card id='starred_card'>
+				<x-layout id='starred'>
+					<header class='top-menu colorBlue'>
+						<div class='header'>
+							<h1>Bookmarks</h1>
+						</div>
+					</header>
+					<section data-type='list'>
+						<ul id='star_list'>
+						</ul>
+					</section>
+					<footer role="toolbar" class='colorBlue'>
+						  <ul>
+							<li><a href='#' class='toSearch linkBlue'>Search</a></li>
+						  </ul>
+						  <ul>
+							<li><a href='#' class='toHistory linkBlue'>History</a></li>
+						  </ul>
+					</footer>
+				</x-layout>
+			</x-card>
+			
+			<x-card id='history_card'>
+				<x-layout id='history'>
+					<header class='top-menu colorBlue'>
+						<menu type="toolbar">
+						    <button id='clear'><span class="mega-octicon octicon-trashcan"></span></button>
+						</menu> 
+						<button disabled></button>
+						<h1>History</h1>
+					</header>
+					<section data-type='list'>
+						<ul id='list_his'>
+						</ul>
+					</section>
+					<footer role="toolbar" class='colorBlue'>
+						  <ul>
+							<li><a href='#' class='toSearch linkBlue'>Search</a></li>
+						  </ul>
+						  <ul>
+							<li><a href='#' class='toStarred linkBlue'>Bookmarks</a></li>
+						  </ul>
+					</footer >
+				</x-layout>
+			</x-card>
+			
+			<x-card id='about_card'>
+				<x-layout id='about'>
+					<header class='top-menu colorBlue'>
+						<menu type="toolbar">
+							<button disabled></button>
+						</menu>
+						<button class='toSearch'><span class="mega-octicon octicon-arrow-left"></span></button>
+						<h1>About</h1>
+					</header>
+					<section id='about_page' data-type='list'>
+						
+						<header class="listheaderBlue borderBlue">Version</header>
+						<p>1.0.1</p>
+						<header class="listheaderBlue borderBlue">Developers</header>
+						<p><strong>nag</strong> [, say /neg]:
+							<br>
+							<a href='#' class='link' id='nicokant'>@nicokant</a>
+							<br>
+							<a href='#' class='link' id='aro94'>@aro94</a>
+							<br>
+							special thanks to <a href="#" id='giuscri' class='link'>@giuscri</a>
+						</p>
+						<p>support us with a review on Mozilla Market Place!</p>
+						<button id='gitfeed' class='buttonBlue'>VIEW GITRSS COMMITS!</button>
+					</section>
+					<footer role="toolbar" class='colorBlue'>
+						<ul>
+							<li><a href='#' class='toStarred linkBlue'>Bookmarks</a></li>
+						</ul>
+						<ul>
+							<li><a href='#' class='toHistory linkBlue'>History</a></li>
+						</ul>
+					</footer>
+				</x-layout>
+			</x-card>
+			
+		</x-deck>
+	</body>
+</html>
+

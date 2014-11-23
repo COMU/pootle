@@ -1,0 +1,22 @@
+{
+  "name": "Pootle",
+  "description": "Pootle Mobile",
+  "version": "1.0.1",
+  "launch_path": "/index.html",
+  "orientation": "portrait",
+  "developer": {
+    "name": "nag"
+  },
+  "permissions":{
+	  "systemXHR": {
+		"description":"Translate app"
+    } 
+  },
+  "type": "privileged",
+  "icons": {
+    "128": "/icon/128.png",
+    "60": "/icon/60.png",
+	"120": "/icon/120.png",
+	"90": "/icon/90.png"
+  }
+}
