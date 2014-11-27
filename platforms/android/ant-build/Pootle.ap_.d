@@ -42,6 +42,8 @@
 /Users/esra/projects/pootle-mobile/platforms/android/assets/www/js/index.js \
 /Users/esra/projects/pootle-mobile/platforms/android/assets/www/js/jquery-2.1.1.min.js \
 /Users/esra/projects/pootle-mobile/platforms/android/assets/www/js/jquery.mobile-1.4.4.min.js \
+/Users/esra/projects/pootle-mobile/platforms/android/assets/www/js/plugins \
+/Users/esra/projects/pootle-mobile/platforms/android/assets/www/js/plugins/jquery.panzoom.js \
 /Users/esra/projects/pootle-mobile/platforms/android/assets/www/plugins/org.apache.cordova.device \
 /Users/esra/projects/pootle-mobile/platforms/android/assets/www/plugins/org.apache.cordova.device/www \
 /Users/esra/projects/pootle-mobile/platforms/android/assets/www/plugins/org.apache.cordova.device/www/device.js \

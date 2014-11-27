@@ -16,7 +16,10 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 var app = {
+
+
     // Application Constructor
     initialize: function() {
         this.bindEvents();
@@ -50,6 +53,7 @@ var app = {
 
 function startApp() {
 
+
     request('http://api.ozdincer.com/api/v1/languages/', function(data){
         alert('Başarıyla giriş yaptınız.');
         window.location.hash = '#languagesPage';
@@ -61,6 +65,7 @@ function startApp() {
 
 
     var selectedlanguage = '';
+    var selectedproject = '';
 
     $(document).on("pageshow","#languagesPage",function() {
         var markup = '<ul data-role="listview" data-theme="b">';
@@ -92,12 +97,46 @@ function startApp() {
                 var markup = '<ul data-role="listview" data-theme="b">';
                 for (var i = 0; i < project.length; i++) {
                     pootle_path = project[i].split("/")[2];
-                    markup += '<li> <a href="#"' + ' >' + (i + 1) + ' - ' + pootle_path + '</a> </li>';
+                    markup += '<li> <a class="project" data-code="' + project[i].stores +'"'+' >' + (i + 1) + ' - ' + pootle_path + '</a> </li>';
 
                 }
 
                 markup += '</ul>';
                 $('#Projects_Content').html(markup);
+
+                $('a.project').on("tap", function() {
+                    selectedproject = $(this).attr("data-code");
+                    $.mobile.changePage( "#filesPage");
+                });
+
+            }, function () {
+                alert('olmadi')
+            });
+
+            console.log(selectedlanguage);
+        }
+
+    });
+
+    $(document).on("pageshow","#filesPage",function() {
+        selectedproject = selectedproject.split(",");
+        var files = [];
+
+        for(var j=0; j<selectedproject.length;j++) {
+
+            url="http://api.ozdincer.com" + selectedproject[j];
+            request(url, function (data) {
+
+                files.push((data.pootle_path));
+                console.log(project);
+                var markup = '<ul data-role="listview" data-theme="b">';
+                for (var i = 0; i < files.length; i++) {
+                    markup += '<li> <a href="#"' + ' >' + (i + 1) + ' - ' + files.name + '</a> </li>';
+
+                }
+
+                markup += '</ul>';
+                $('#Files_Content').html(markup);
 
             }, function () {
                 alert('olmadi')
@@ -119,7 +158,7 @@ function request(url, successCallback, errorCallback) {
     $.ajax({
         type: "GET",
         url: url,
-        dataType: 'json',
+        dataType: 'jsonp',
         async: false,
         data: '{}',
         beforeSend: function (xhr) {
