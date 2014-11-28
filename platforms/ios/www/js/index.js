@@ -16,7 +16,10 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 var app = {
+
+
     // Application Constructor
     initialize: function() {
         this.bindEvents();
@@ -50,17 +53,23 @@ var app = {
 
 function startApp() {
 
+
     request('http://api.ozdincer.com/api/v1/languages/', function(data){
-        alert('Başarıyla giriş yaptınız.');
+
         window.location.hash = '#languagesPage';
         console.log(data)
         projects = data.objects;
 
     }, function() {
-        alert('Kullanıcı adı veya parola hatalı.')});
+        navigator.notification.alert(
+            'Kullanıcı adı veya parola hatalı!',  // message
+            'Game Over',            // title
+            'Opps'                  // buttonName
+        );});
 
 
     var selectedlanguage = '';
+    var selectedproject = '';
 
     $(document).on("pageshow","#languagesPage",function() {
         var markup = '<ul data-role="listview" data-theme="b">';
@@ -83,21 +92,48 @@ function startApp() {
         var project = [];
 
         for(var j=0; j<selectedlanguage.length;j++) {
-
             url="http://api.ozdincer.com" + selectedlanguage[j];
             request(url, function (data) {
 
-                project.push((data.pootle_path));
-                console.log(project);
+                project= data ;
                 var markup = '<ul data-role="listview" data-theme="b">';
-                for (var i = 0; i < project.length; i++) {
-                    pootle_path = project[i].split("/")[2];
-                    markup += '<li> <a href="#"' + ' >' + (i + 1) + ' - ' + pootle_path + '</a> </li>';
+                pootle_path = (project.pootle_path).split("/")[2];
+                markup += '<li> <a class="project" data-code="' + project.stores +'"'+' >' + pootle_path + '</a> </li></ul>';
 
-                }
+                $('#Projects_Content').html(markup);
+
+                $('a.project').on("tap", function() {
+                    selectedproject = $(this).attr("data-code");
+                    $.mobile.changePage( "#filesPage");
+                });
+
+            }, function () {
+                alert('olmadi')
+            });
+
+        }
+
+    });
+
+   $(document).on("pageshow","#filesPage",function() {
+        selectedproject = selectedproject.split(",");
+        console.log(selectedproject);
+        var files = [];
+
+        for(var j=0; j<selectedproject.length;j++) {
+
+            url="http://api.ozdincer.com" + selectedproject[j];
+            request(url, function (data) {
+
+                files=data;
+                console.log(files);
+                var markup = '<ul data-role="listview" data-theme="b">';
+
+                markup += '<li> <a href="#"' + ' >' + files.name + '</a> </li>';
+
 
                 markup += '</ul>';
-                $('#Projects_Content').html(markup);
+                $('#Files_Content').html(markup);
 
             }, function () {
                 alert('olmadi')
@@ -107,7 +143,6 @@ function startApp() {
         }
 
     });
-
 
 
 }

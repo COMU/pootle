@@ -45,6 +45,11 @@
 /Users/esra/projects/pootle-mobile/platforms/android/assets/www/js/plugins \
 /Users/esra/projects/pootle-mobile/platforms/android/assets/www/js/plugins/jquery.panzoom.js \
 /Users/esra/projects/pootle-mobile/platforms/android/assets/www/plugins/org.apache.cordova.device \
+/Users/esra/projects/pootle-mobile/platforms/android/assets/www/plugins/org.apache.cordova.dialogs \
 /Users/esra/projects/pootle-mobile/platforms/android/assets/www/plugins/org.apache.cordova.device/www \
 /Users/esra/projects/pootle-mobile/platforms/android/assets/www/plugins/org.apache.cordova.device/www/device.js \
+/Users/esra/projects/pootle-mobile/platforms/android/assets/www/plugins/org.apache.cordova.dialogs/www \
+/Users/esra/projects/pootle-mobile/platforms/android/assets/www/plugins/org.apache.cordova.dialogs/www/android \
+/Users/esra/projects/pootle-mobile/platforms/android/assets/www/plugins/org.apache.cordova.dialogs/www/notification.js \
+/Users/esra/projects/pootle-mobile/platforms/android/assets/www/plugins/org.apache.cordova.dialogs/www/android/notification.js \
 /Users/esra/projects/pootle-mobile/platforms/android/ant-build/AndroidManifest.xml \

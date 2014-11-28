@@ -55,13 +55,17 @@ function startApp() {
 
 
     request('http://api.ozdincer.com/api/v1/languages/', function(data){
-        alert('Başarıyla giriş yaptınız.');
+
         window.location.hash = '#languagesPage';
         console.log(data)
         projects = data.objects;
 
     }, function() {
-        alert('Kullanıcı adı veya parola hatalı.')});
+        navigator.notification.alert(
+            'Kullanıcı adı veya parola hatalı!',  // message
+            'Game Over',            // title
+            'Opps'                  // buttonName
+        );});
 
 
     var selectedlanguage = '';
@@ -88,20 +92,14 @@ function startApp() {
         var project = [];
 
         for(var j=0; j<selectedlanguage.length;j++) {
-
             url="http://api.ozdincer.com" + selectedlanguage[j];
             request(url, function (data) {
 
-                project.push((data.pootle_path));
-                console.log(project);
+                project= data ;
                 var markup = '<ul data-role="listview" data-theme="b">';
-                for (var i = 0; i < project.length; i++) {
-                    pootle_path = project[i].split("/")[2];
-                    markup += '<li> <a class="project" data-code="' + project[i].stores +'"'+' >' + (i + 1) + ' - ' + pootle_path + '</a> </li>';
+                pootle_path = (project.pootle_path).split("/")[2];
+                markup += '<li> <a class="project" data-code="' + project.stores +'"'+' >' + pootle_path + '</a> </li></ul>';
 
-                }
-
-                markup += '</ul>';
                 $('#Projects_Content').html(markup);
 
                 $('a.project').on("tap", function() {
@@ -113,13 +111,13 @@ function startApp() {
                 alert('olmadi')
             });
 
-            console.log(selectedlanguage);
         }
 
     });
 
-    $(document).on("pageshow","#filesPage",function() {
+   $(document).on("pageshow","#filesPage",function() {
         selectedproject = selectedproject.split(",");
+        console.log(selectedproject);
         var files = [];
 
         for(var j=0; j<selectedproject.length;j++) {
@@ -127,13 +125,12 @@ function startApp() {
             url="http://api.ozdincer.com" + selectedproject[j];
             request(url, function (data) {
 
-                files.push((data.pootle_path));
-                console.log(project);
+                files=data;
+                console.log(files);
                 var markup = '<ul data-role="listview" data-theme="b">';
-                for (var i = 0; i < files.length; i++) {
-                    markup += '<li> <a href="#"' + ' >' + (i + 1) + ' - ' + files.name + '</a> </li>';
 
-                }
+                markup += '<li> <a href="#"' + ' >' + files.name + '</a> </li>';
+
 
                 markup += '</ul>';
                 $('#Files_Content').html(markup);
@@ -148,7 +145,6 @@ function startApp() {
     });
 
 
-
 }
 
 
@@ -158,7 +154,7 @@ function request(url, successCallback, errorCallback) {
     $.ajax({
         type: "GET",
         url: url,
-        dataType: 'jsonp',
+        dataType: 'json',
         async: false,
         data: '{}',
         beforeSend: function (xhr) {

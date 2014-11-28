@@ -55,13 +55,17 @@ function startApp() {
 
 
     request('http://api.ozdincer.com/api/v1/languages/', function(data){
-        alert('Başarıyla giriş yaptınız.');
+
         window.location.hash = '#languagesPage';
         console.log(data)
         projects = data.objects;
 
     }, function() {
-        alert('Kullanıcı adı veya parola hatalı.')});
+        navigator.notification.alert(
+            'Kullanıcı adı veya parola hatalı!',  // message
+            'Game Over',            // title
+            'Opps'                  // buttonName
+        );});
 
 
     var selectedlanguage = '';
@@ -150,7 +154,7 @@ function request(url, successCallback, errorCallback) {
     $.ajax({
         type: "GET",
         url: url,
-        dataType: 'jsonp',
+        dataType: 'json',
         async: false,
         data: '{}',
         beforeSend: function (xhr) {
