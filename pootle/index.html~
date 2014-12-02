@@ -4,15 +4,12 @@
 		<meta name="viewport" content="width=device-width, user-scalable=no" />
 		<script src='js/jquery-2.1.0.min.js'></script>
 		<script src='js/brick-1.0.1.js'></script>
-		<script src='js/localStorage.js'></script>
 		<script src='js/script.js'></script>
 		
-		<link type='text/css' href='style/lists.css' rel="stylesheet">
-		<link type='text/css' href='style/toolbars.css' rel="stylesheet">
-		<link type='text/css' href='style/headers.css' rel="stylesheet">
+		
 		<link type='text/css' href='style/brick-1.0.1.css' rel="stylesheet">
 		<link type='text/css' href='style/style.css' rel="stylesheet">
-		<link type='text/css' href='style/octicons.css' rel="stylesheet"> 
+		
 	</head>
 	<body>	
 		<x-deck>
@@ -20,8 +17,9 @@
 				<x-layout id='search_layout'>
 					<header class='top-menu colorBlue'>
 						<button disabled></button>
-						
-						<h1>POOTLE LOGIN</h1>
+						<menu type="toolbar">
+						    <button id='toAbout'><span class="mega-octicon octicon-question"></span></button>
+						<h1>POOTLE</h1>
 					</header>
 					<section id='search_section'>
 						<div id='inputs'>
@@ -34,7 +32,26 @@
 					
 				</x-layout>
 			</x-card>
-					
+				
+
+ <div data-role="page" data-theme="b" id="languagesPage">
+
+           <div data-role="collapsible" data-theme="b" data-content-theme="b" >
+                <h2 > Languages </h2>
+                <div id="Languages_Content" ></div>
+            </div>
+
+        </div>
+
+        <div data-role="page" data-theme="b" id="projectsPage">
+
+            <div data-role="collapsible" data-theme="b" data-content-theme="b" >
+                <h2 > Projects </h2>
+                <div id="Projects_Content" ></div>
+            </div>
+
+        </div>
+	
 			<x-card id='res_card' transition-type='slide-right'>
 				<x-layout id='res_layout'>
 					<header class='top-menu colorBlue'>
@@ -58,6 +75,28 @@
 					</footer>
 				</x-layout>
 			</x-card>
+
+
+
+
+
+
+
+
+
+<div data-role="page" data-theme="b" id="languagesPage">
+<div data-role="collapsible" data-theme="b" data-content-theme="b" >
+<h2 > Languages </h2>
+<div id="Languages_Content" ></div>
+</div>
+</div>
+<div data-role="page" data-theme="b" id="projectsPage">
+<div data-role="collapsible" data-theme="b" data-content-theme="b" >
+<h2 > Projects </h2>
+<div id="Projects_Content" ></div>
+</div>
+</div>
+
 			
 			<x-card id='starred_card'>
 				<x-layout id='starred'>
@@ -128,6 +167,7 @@
 							special thanks to <a href="#" id='giuscri' class='link'>@giuscri</a>
 						</p>
 						<p>support us with a review on Mozilla Market Place!</p>
+						<button id='gitfeed' class='buttonBlue'>VIEW GITRSS COMMITS!</button>
 					</section>
 					<footer role="toolbar" class='colorBlue'>
 						<ul>

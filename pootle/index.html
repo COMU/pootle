@@ -4,7 +4,6 @@
 		<meta name="viewport" content="width=device-width, user-scalable=no" />
 		<script src='js/jquery-2.1.0.min.js'></script>
 		<script src='js/brick-1.0.1.js'></script>
-		<script src='js/localStorage.js'></script>
 		<script src='js/script.js'></script>
 		
 		
@@ -18,8 +17,9 @@
 				<x-layout id='search_layout'>
 					<header class='top-menu colorBlue'>
 						<button disabled></button>
-						
-						<h1>POOTLE LOGIN</h1>
+						<menu type="toolbar">
+						    <button id='toAbout'><span class="mega-octicon octicon-question"></span></button>
+						<h1>POOTLE</h1>
 					</header>
 					<section id='search_section'>
 						<div id='inputs'>
@@ -32,7 +32,26 @@
 					
 				</x-layout>
 			</x-card>
-					
+				
+
+ <div data-role="page" data-theme="b" id="languagesPage">
+
+           <div data-role="collapsible" data-theme="b" data-content-theme="b" >
+                <h2 > Languages </h2>
+                <div id="Languages_Content" ></div>
+            </div>
+
+        </div>
+
+        <div data-role="page" data-theme="b" id="projectsPage">
+
+            <div data-role="collapsible" data-theme="b" data-content-theme="b" >
+                <h2 > Projects </h2>
+                <div id="Projects_Content" ></div>
+            </div>
+
+        </div>
+	
 			<x-card id='res_card' transition-type='slide-right'>
 				<x-layout id='res_layout'>
 					<header class='top-menu colorBlue'>
@@ -56,8 +75,12 @@
 					</footer>
 				</x-layout>
 			</x-card>
+
+
+
+
 			
-			<x-card id='starred_card'>
+			<x-card id='languages'>
 				<x-layout id='starred'>
 					<header class='top-menu colorBlue'>
 						<div class='header'>
