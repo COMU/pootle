@@ -79,26 +79,8 @@
 
 
 
-
-
-
-
-
-<div data-role="page" data-theme="b" id="languagesPage">
-<div data-role="collapsible" data-theme="b" data-content-theme="b" >
-<h2 > Languages </h2>
-<div id="Languages_Content" ></div>
-</div>
-</div>
-<div data-role="page" data-theme="b" id="projectsPage">
-<div data-role="collapsible" data-theme="b" data-content-theme="b" >
-<h2 > Projects </h2>
-<div id="Projects_Content" ></div>
-</div>
-</div>
-
 			
-			<x-card id='starred_card'>
+			<x-card id='languages'>
 				<x-layout id='starred'>
 					<header class='top-menu colorBlue'>
 						<div class='header'>
