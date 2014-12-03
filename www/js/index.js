@@ -16,10 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
 var app = {
-
-
     // Application Constructor
     initialize: function() {
         this.bindEvents();
@@ -51,10 +48,13 @@ var app = {
     }
 };
 
+var apiRoot = 'http://api.ozdincer.com';
 function startApp() {
-
-
-    request('http://api.ozdincer.com/api/v1/languages/', function(data){
+    request(apiRoot + '/api/v1/languages/', function(data){
+        if (JSON.parse(window.localStorage.getItem('db')))
+            allData = JSON.parse(window.localStorage.getItem('db'));
+        else
+            createData(data);
 
         window.location.hash = '#languagesPage';
         console.log(data)
@@ -62,91 +62,110 @@ function startApp() {
 
     }, function() {
         navigator.notification.alert(
-            'Kullanıcı adı veya parola hatalı!',  // message
-            'Game Over',            // title
+            'Kullanici adi veya parola hatali',  // message
+            'Dikkat!!',            // title
             'Opps'                  // buttonName
         );});
 
 
     var selectedlanguage = '';
-    var selectedproject = '';
+    var selectedlanguageIndex = 0;
+    var selectedProjectIndex = 0;
 
     $(document).on("pageshow","#languagesPage",function() {
         var markup = '<ul data-role="listview" data-theme="b">';
         for (var i = 0; i < projects.length; i++) {
-            markup += '<li> <a class="language" data-code="'+ projects[i].translation_projects +'"'+' >' + (i + 1) + ' - ' + projects[i].fullname + '</a> </li>';
+            markup += '<li> <a class="language" data-code="'+ i +'"'+' >' + (i + 1) + ' - ' + projects[i].fullname + '</a> </li>';
         }
 
         markup += '</ul>';
         $('#Languages_Content').html(markup);
-
         $('a.language').on("tap", function() {
-            selectedlanguage = $(this).attr("data-code");
+            selectedlanguageIndex = $(this).attr("data-code");
+            console.log(selectedlanguageIndex)
             $.mobile.changePage( "#projectsPage");
         });
     });
 
 
     $(document).on("pageshow","#projectsPage",function() {
-        selectedlanguage = selectedlanguage.split(",");
-        var project = [];
-
-        for(var j=0; j<selectedlanguage.length;j++) {
-            url="http://api.ozdincer.com" + selectedlanguage[j];
-            request(url, function (data) {
-
-                project= data ;
-                var markup = '<ul data-role="listview" data-theme="b">';
-                pootle_path = (project.pootle_path).split("/")[2];
-                markup += '<li> <a class="project" data-code="' + project.stores +'"'+' >' + pootle_path + '</a> </li></ul>';
-
-                $('#Projects_Content').html(markup);
-
-                $('a.project').on("tap", function() {
-                    selectedproject = $(this).attr("data-code");
-                    $.mobile.changePage( "#filesPage");
-                });
-
-            }, function () {
-                alert('olmadi')
-            });
-
+        var language = allData[selectedlanguageIndex];
+        var markup = '<ul data-role="listview" data-theme="b">';
+        for (var i = 0; i < language.translation_projects.length; i++) {
+            real_path = language.translation_projects[i].real_path.split("/")[0];
+            markup += '<li> <a class="project" data-code="' + i +'"'+' >' + real_path + '</a> </li>';
         }
+        markup += '</ul>';
+
+        $('#Projects_Content').html(markup);
+
+        $('a.project').on("tap", function() {
+            selectedProjectIndex = $(this).attr("data-code");
+            $.mobile.changePage( "#filesPage");
+        });
 
     });
 
-   $(document).on("pageshow","#filesPage",function() {
-        selectedproject = selectedproject.split(",");
-        console.log(selectedproject);
-        var files = [];
-
-        for(var j=0; j<selectedproject.length;j++) {
-
-            url="http://api.ozdincer.com" + selectedproject[j];
-            request(url, function (data) {
-
-                files=data;
-                console.log(files);
-                var markup = '<ul data-role="listview" data-theme="b">';
-
-                markup += '<li> <a href="#"' + ' >' + files.name + '</a> </li>';
-
-
-                markup += '</ul>';
-                $('#Files_Content').html(markup);
-
-            }, function () {
-                alert('olmadi')
-            });
-
-            console.log(selectedlanguage);
+    $(document).on("pageshow","#filesPage",function() {
+        var stores = allData[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores;
+        var markup = '<ul data-role="listview" data-theme="b">';
+        for (var i = 0; i < stores.length; i++) {
+            markup += '<li> <a href="#"' + ' >' + stores[i].name + '</a> </li>';
         }
-
+        markup += '</ul>';
+        $('#Files_Content').html(markup);
     });
 
 
 }
 
+var allData = [];
+var translationProjectCount = 0;
+var storesCount = 0;
+function createData(data) {
+    allData = data.objects;
+
+    for (var i = 0; i < allData.length; i++) {
+        var translationProjects = allData[i]['translation_projects'];
+        for (var j = 0; j < translationProjects.length; j++) {
+            updateTranslationProject(i, j, apiRoot + translationProjects[j]);
+        }
+    }
+}
+
+function updateTranslationProject(i, j, url) {
+    request(url, function(data) {
+        allData[i]['translation_projects'][j] = data;
+        translationProjectCount++;
+        console.log(translationProjectCount)
+        if (translationProjectCount == 65) {
+            startStores();
+        }
+    });
+}
+
+function startStores() {
+    for (var i = 0; i < allData.length; i++) {
+        var translationProjects = allData[i]['translation_projects'];
+        for (var j = 0; j < translationProjects.length; j++) {
+            var stores = translationProjects[j]['stores'];
+            for (var k = 0; k < stores.length; k++) {
+                updateStores(i, j, k, apiRoot + stores[k]);
+            }
+        }
+    }
+}
+
+function updateStores(i, j, k, url) {
+    request(url, function(data) {
+        allData[i]['translation_projects'][j]['stores'][k] = data;
+        storesCount++;
+        console.log(storesCount)
+        if (storesCount == 74) {
+            window.localStorage.setItem('db', JSON.stringify(allData));
+        }
+    });
+};
 
 function request(url, successCallback, errorCallback) {
     var username = document.getElementById("username").value;
@@ -154,7 +173,7 @@ function request(url, successCallback, errorCallback) {
     $.ajax({
         type: "GET",
         url: url,
-        dataType: 'json',
+        dataType: 'jsonp',
         async: false,
         data: '{}',
         beforeSend: function (xhr) {
@@ -170,5 +189,4 @@ function request(url, successCallback, errorCallback) {
         return "Basic " + hash;
     };
 }
-
-
+ 
