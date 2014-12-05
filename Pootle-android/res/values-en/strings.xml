@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pootle</string>
+    <string name="start">Welcome</string>
+<string name="username">User Name:</string>
+    <string name="passwd">Password:</string>
+    <string name="server">Server:</string>
+    <string name="login">Login</string>
+    <string name="remember">Remember Me</string>
+    <string name="forgot">I forgot my password</string>
+    <string name="listlanguages">Choose a language</string>
+    <string name="listprojects">Choose a projects</string>
+</resources>

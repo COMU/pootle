@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pootle</string>
+    <string name="start">Hoşgeldiniz</string>
+    <string name="username">Kullanıcı Adı:</string>
+    <string name="passwd">Şifre:</string>
+    <string name="login">Oturum Aç</string>
+    <string name="server">Sunucu:</string>
+    <string name="remember">Beni Hatırla</string>
+    <string name="forgot">Şifremi Unuttum</string>
+    <string name="listlanguages">Dili Seçin</string>
+    <string name="listprojects">Proje Seçin</string>
+
+
+
+</resources>
