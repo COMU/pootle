@@ -11,8 +11,13 @@ $(document).on('click','#submit',function(){
 			sendRequest(username,password);
 		}
 	});
+
+ 
+
+
 /*send the xmlHTTPRequest*/
 function sendRequest(username,password){
+        
 
         request=new XMLHttpRequest({mozSystem:true});
 
@@ -34,57 +39,37 @@ function sendRequest(username,password){
 	request.onreadystatechange=function(){
 
           if(request.status==200 && request.readyState==4){
-		        alert('giriş başarılı');
-			/*xml parsing the answer*/
-			request.open('GET', 'http://api.ozdincer.com/',true);
-			response=request.responseText;
-			responseDoc=$.parseXML(response);
-			$response=$(responseDoc);
-		
-			/*scraping the answer to find useful infos, then clear current list*/
-			titolo= $response.find('Languages');
-			$('#reslist').empty();
-			
-			/*iterate all the values*/
-			for(i=0;i<=titolo.length; i++){
-					linkst=$response.find('entry link')[i].getAttribute("href");
-					/*show results*/
-					$('#reslist').append('<header class="listheaderBlue borderBlue">'+''+'</header><a href="#" id="foo" title="'+linkst+'">'+''+'<p class="Languages">'+titolo[i].textContent+'</p></a>');
-
-                         
-                      }
-                        goToCard(1);
-			
-			/*add this datas to storage*/
-			searchData={
-				'languages':Languages,
-				
-			};
+		       alert('Giriş Başarılı..');
+                       var data = JSON.parse(request.response);
+                       stringdata=JSON.stringify(data);
+                       var obj = JSON.parse(stringdata);
+                       results.innerHTML = "";
+                       
+                      
+                       
+                       for (var i in stringdata) {
+                             
+                              results.innerHTML += obj.objects[i].fullname+"<hr/>";  
+                               }  
+                       
+                       request.send(null);  
+                       results.innerHTML =""
+                        
 			
 		  }
-	
+
+          
 
 		/*if it's ready but hasn't find any page*/
 		if(request.status == 401 && request.readyState==4){
-			alert(request.status);
+			alert('Parola yanlış..');
 			$('input[name=password]').val("");
 			$('input[name=username]').val("");
 			return;
 		}
 		
 		/*if it's ready and has found the URL*/
-		else{
-                 alert(request.status); 
-              }
+		
 };
 	}
-function goToCard(cardNum){
-	document.querySelector('x-deck').showCard(cardNum);
-	
-	/*reset inputs and clear lists*/
-	$('input[name=Languages]').val("");
-	$('#list_his').empty();
-	$('#star_list').empty();	
-	
-}
 
