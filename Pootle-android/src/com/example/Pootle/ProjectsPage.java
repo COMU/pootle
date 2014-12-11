@@ -3,9 +3,11 @@ package com.example.Pootle;
 import android.app.Activity;
 
 
-
+import android.content.Intent;
 import android.view.View;
 import android.os.Bundle;
+
+import java.io.File;
 import java.lang.String;
 
 import android.widget.TextView;
@@ -41,7 +43,11 @@ public class ProjectsPage extends Activity {
     ArrayList<String> listpath = new ArrayList<String>();
     ArrayList<String> translation_projects = new ArrayList<String>();
     ArrayList<String> translation_projects_name = new ArrayList<String>();
-    ArrayList<String> store_path = new ArrayList<String>();
+    ArrayList<String> file_name = new ArrayList<String>();
+    ArrayList<String> stores = new ArrayList<String>();
+    ArrayList<String> stores_project = new ArrayList<String>();
+
+
 
 
     ListView listview;
@@ -62,12 +68,7 @@ public class ProjectsPage extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.languagespage);
 
-
         ciktii = getIntent().getStringExtra("cikti");
-
-
-        System.out.println("***************************************************************");
-
         try {
             JSONObject genreJsonObject = new JSONObject(ciktii);
             // get the title
@@ -84,18 +85,13 @@ public class ProjectsPage extends Activity {
                 listpath.add(firstGenre.getString("resource_uri"));
 
             }
-
-
-            System.out.println("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-/n" + listpath);
-
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         //dilleri liste şeklinde görüntüleme
 
-        listview = (ListView) findViewById(listView);
+        listview = (ListView) findViewById(R.id.listView);
 
 
         ArrayList<String> languageslist = new ArrayList<String>(listt);
@@ -107,6 +103,8 @@ public class ProjectsPage extends Activity {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                             @Override
                                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
 
                                                 //listt adları tutuyor listpath de url yi tutuyor örneğin: listt:Türkiye listpath : /api/vi/languages/24/
 
@@ -142,11 +140,14 @@ public class ProjectsPage extends Activity {
 
                                                         JSONObject obj2 = new JSONObject(translationpath);
                                                         String n = obj2.getString("real_path");
-                                                        System.out.println("nnnnnnnnnn" + n);
-                                                        String[] nn = n.split(",");
-                                                        translation_projects_name.add(nn[0]);
+                                                        String delims = "[/]";
+                                                        String[] tokens = n.split(delims);
+
+                                                        translation_projects_name.add(tokens[0]);
+                                                        stores.add(obj2.getString("stores"));
                                                     }
-                                                    listele(translation_projects_name);
+
+                                                    listele(translation_projects_name,stores);
                                                 } catch (JSONException e) {
                                                     e.printStackTrace();
                                                 }
@@ -162,26 +163,45 @@ public class ProjectsPage extends Activity {
 
 
     }
-    public void listele(ArrayList arry) {
+    public void listele(final ArrayList<String> arry, final ArrayList<String> arrstores) {
 
         //projeleri liste şeklinde görüntüleme
 
-        listview2 = (ListView) findViewById(listView2);
+        listview2 = (ListView) findViewById(R.id.listView2);
         ArrayList<String> projectlist = new ArrayList<String>(arry);
 
 
         listview2.setAdapter(new ArrayAdapter(this, android.R.layout.simple_list_item_1, projectlist));
 
         //listeden bir projeye tıklanıldığında
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listview2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                       //store_path'i tutmalı
 
 
+                String arrstore = arrstores.get(position);
+                Intent files = new Intent(ProjectsPage.this, FilesPage.class);
+                files.putExtra("store_path", arrstore);
+                files.putExtra("username",username);
+                files.putExtra("hostname", hostname);
+                files.putExtra("password", password);
+                startActivity(files);
+
+
+
 
             }
-        });
+
+
+                                        }
+
+
+        );
+
+
+
+
     }
 
 
@@ -214,15 +234,17 @@ public class ProjectsPage extends Activity {
                 System.out.println("Response content length: " + entity.getContentLength());
                 responses = EntityUtils.toString(entity);
                 System.out.println("++++++++++++++++++++++" + responses);
-
+                httpget.abort();
             }
 
         } catch (Exception e) {
             e.printStackTrace();
 
         }
+
         return responses;
     }
+
 }
 
 

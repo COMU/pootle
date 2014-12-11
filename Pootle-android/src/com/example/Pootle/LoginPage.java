@@ -107,7 +107,7 @@ public class LoginPage extends Activity implements View.OnClickListener {
 
                     System.out.println(cikti);
 
-                    Intent i = new Intent(this, ProjectsPage.class);
+                    Intent i = new Intent(LoginPage.this, ProjectsPage.class);
                     i.putExtra("cikti", cikti);
                     i.putExtra("hostname", hostname);
                     i.putExtra("username",username);
