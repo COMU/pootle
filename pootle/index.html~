@@ -4,7 +4,6 @@
 		<meta name="viewport" content="width=device-width, user-scalable=no" />
 		<script src='js/jquery-2.1.0.min.js'></script>
 		<script src='js/brick-1.0.1.js'></script>
-		<script src='js/localStorage.js'></script>
 		<script src='js/script.js'></script>
 		
 		<link type='text/css' href='style/lists.css' rel="stylesheet">
@@ -21,7 +20,7 @@
 					<header class='top-menu colorBlue'>
 						<button disabled></button>
 						
-						<h1>POOTLE</h1>
+						<h1>POOTLE LOGIN</h1>
 					</header>
 					<section id='search_section'>
 						<div id='inputs'>
@@ -34,7 +33,31 @@
 					
 				</x-layout>
 			</x-card>
-					
+
+
+
+<div data-role="page" id="second">
+        <div data-theme="a" data-role="header">
+            <h3>
+                Second Page
+            </h3>
+            <a href="#index" class="ui-btn-left">Back</a>
+        </div>
+
+        <div data-role="content">
+            <h2>Simple list</h2>
+            <ul data-role="listview" data-inset="true" id="movie-data" data-theme="a">
+
+            </ul>
+        </div>
+
+        <div data-theme="a" data-role="footer" data-position="fixed">
+
+        </div>
+    </div>   
+
+     
+  				
 			<x-card id='res_card' transition-type='slide-right'>
 				<x-layout id='res_layout'>
 					<header class='top-menu colorBlue'>
@@ -42,11 +65,21 @@
 						<menu type="toolbar">
 						    <button id='star_this'><span class="mega-octicon octicon-star"></span></button>
 						</menu>
-						<h1 id='repo'></h1>
+						<h1 id='username'></h1>
 					</header>
 					<section id='res_section'>
-						<div id='reslist' data-type='list'>
+                                                <div data-role="page" id="home">
+                                               <div data-theme="a" data-role="header">
+                                           <div data-role="content">
+                                             <div class="example-wrapper" data-iscroll>
+                                               <ul data-role="listview"  id="reslist" data-theme="a">
+                
+                                              </ul>
+                                             </div>
+                                         </div>
+
 						</div>
+                                         </div>
 					</section>
 					
 				</x-layout>

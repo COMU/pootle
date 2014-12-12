@@ -12,8 +12,40 @@ $(document).on('click','#submit',function(){
 		}
 	});
 
- 
+function projects(){
+      var data = JSON.parse(request.response);
+      stringdata=JSON.stringify(data);
+      var obj = JSON.parse(stringdata);
+      var selected=obj.objects[0].translation_projects;
+      alert(selected);
+      selected="'"+selected+"'";
+      selected = selected.split(","); 
+      length=selected.length;
 
+      for(var a=0; a<length; a++) {
+              selected[a] = selected[a].replace("'", "");
+              alert(selected[a]);
+              newrequest=new XMLHttpRequest({mozSystem:true});
+              newrequest.open('GET', 'http://api.ozdincer.com'+selected[a],true,username,password);
+              newrequest.send();
+              newrequest.onreadystatechange=function(){
+                 
+
+                 if(newrequest.status==200 && newrequest.readyState==4){
+                    var data = JSON.parse(newrequest.response);
+                    stringdata=JSON.stringify(data);
+                    alert(stringdata);
+                    var obj = JSON.parse(stringdata);
+                    results.innerHTML = "";
+                    alert(obj.real_path);
+                    for (var j in stringdata) {
+                            results.innerHTML += '<header class="listheaderBlue borderBlue">'+'<p class="project">'+obj.real_path+'</p>'; 
+                        }
+                 }
+      }
+     }
+
+}
 
 /*send the xmlHTTPRequest*/
 function sendRequest(username,password){
@@ -44,19 +76,18 @@ function sendRequest(username,password){
                        stringdata=JSON.stringify(data);
                        var obj = JSON.parse(stringdata);
                        results.innerHTML = "";
-                       
                       
                        
-                       for (var i in stringdata) {
                              
-                              results.innerHTML += obj.objects[i].fullname+"<hr/>";  
-                               }  
-                       
-                       request.send(null);  
-                       results.innerHTML =""
-                        
-			
-		  }
+                // array[i]= obj.objects[i].fullname+"<hr/>"; 
+//$('#movie-list').append('<header class="listheaderBlue borderBlue">'+'<p class="language">'+obj.objects[i].fullname+'</p>');
+                             
+                   
+                        for (var i in stringdata) {
+                            results.innerHTML += '<header class="listheaderBlue borderBlue">'+'<p class="language">'+obj.objects[i].fullname+'</p>'; 
+                        }
+
+          }
 
           
 
