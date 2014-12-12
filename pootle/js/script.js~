@@ -17,7 +17,6 @@ function projects(){
       stringdata=JSON.stringify(data);
       var obj = JSON.parse(stringdata);
       var selected=obj.objects[0].translation_projects;
-      alert(selected);
       selected="'"+selected+"'";
       selected = selected.split(","); 
       length=selected.length;
@@ -37,6 +36,7 @@ function projects(){
                     alert(stringdata);
                     var obj = JSON.parse(stringdata);
                     results.innerHTML = "";
+                    files();
                     alert(obj.real_path);
                     for (var j in stringdata) {
                             results.innerHTML += '<header class="listheaderBlue borderBlue">'+'<p class="project">'+obj.real_path+'</p>'; 
@@ -44,6 +44,38 @@ function projects(){
                  }
       }
      }
+
+}
+function files(){
+      var data = JSON.parse(newrequest.response);
+      stringdata=JSON.stringify(data);
+      var obj = JSON.parse(stringdata);
+      var selected=obj.stores;
+      selected="'"+selected+"'";
+      selected = selected.split(","); 
+      length=selected.length;
+
+            for(var y=0; y<length; y++) {
+              selected[y] = selected[y].replace("'", "");
+              alert(selected[y]);
+              filerequest=new XMLHttpRequest({mozSystem:true});
+              filerequest.open('GET', 'http://api.ozdincer.com'+selected[y],true,username,password);
+              filerequest.send();
+              filerequest.onreadystatechange=function(){
+               if(filerequest.status==200 && filerequest.readyState==4){
+                    var data = JSON.parse(filerequest.response);
+                    stringdata=JSON.stringify(data);
+                    alert(stringdata);
+                    var obj = JSON.parse(stringdata);
+                    results.innerHTML = "";
+                    alert(obj.name);
+                    for (var j in stringdata) {
+                            results.innerHTML += '<header class="listheaderBlue borderBlue">'+'<p class="project">'+obj.name+'</p>'; 
+                        }
+                 }
+                 
+           }
+
 
 }
 
@@ -72,7 +104,6 @@ function sendRequest(username,password){
 
           if(request.status==200 && request.readyState==4){
 		       alert('Giriş Başarılı..');
-                       projects();
                        var data = JSON.parse(request.response);
                        stringdata=JSON.stringify(data);
                        var obj = JSON.parse(stringdata);
