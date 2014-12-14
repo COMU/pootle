@@ -153,6 +153,23 @@ ol li:last-child {
     border-bottom-width: 0;
 }
 
+.ui-bar-f {
+    font-weight: bold;
+    color: #000000;
+    background-color: #0489B7;
+}
+
+.ui-body-f {
+    font-weight: bold;
+    color: black;
+    background-color: #0489B7;
+}
+
+.ui-page-theme-f {
+    font-weight: bold;
+    background-color: #0489B7;
+}
+
 progress {
     -webkit-appearance: none;
     margin: 20px 0;

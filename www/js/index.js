@@ -112,7 +112,7 @@ function startApp() {
         var markup = '';
         for (var i = 0; i < stores.length; i++) {
             var progress = stores[i]['statistics']['translated']['percentage'];
-            markup += '<tr><td><a class="store" data-code="' + i +'">' + stores[i].name + '</a></td>' +
+            markup += '<tr><td><a class="store" data-code="' + i +'">' + stores[i].name.slice(0,10) + '</a></td>' +
                 '<td><progress value="'+ progress +'" max="100"></progress></td></tr>';
         }
 
@@ -126,26 +126,7 @@ function startApp() {
         });
     });
 
-    });
 
-    $(document).on("pageshow","#filesPage",function() {
-        var stores = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores;
-        console.log(stores)
-        var markup = '';
-        for (var i = 0; i < stores.length; i++) {
-            var progress = stores[i]['statistics']['translated']['percentage'];
-            markup += '<tr><td><a class="store" data-code="' + i +'">' + stores[i].name + '</a></td>' +
-                '<td><progress value="'+ progress +'" max="100"></progress></td></tr>';
-        }
-
-        $('#Files_Content').html(markup);
-        $("#fileTable").table( "refresh" );
-
-
-        $('.store').on("tap", function() {
-            selectedStoreIndex = $(this).attr("data-code");
-            $.mobile.changePage( "#translatePage");
-    });
 
 });
 
@@ -207,7 +188,7 @@ function request(url, successCallback, errorCallback) {
     $.ajax({
         type: "GET",
         url: url,
-        dataType: 'json',
+        dataType: 'jsonp',
         async: false,
         data: '{}',
         beforeSend: function (xhr) {
