@@ -18,69 +18,63 @@
     under the License.
 -->
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="initial-scale=1.5, maximum-scale=5, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi"/>
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.4.min.css" />
-        <meta name="msapplication-tap-highlight" content="no" />
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.4.min.css" />
+    <meta name="msapplication-tap-highlight" content="no" />
 
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
-        <script type="text/javascript" src="js/jquery.mobile-1.4.4.min.js"></script>
-        <script type="text/javascript">
-            app.initialize();
-        </script>
-    </head>
-    <body>
-        <!-- Kaynak: http://www.youtube.com/watch?v=Zvp7kUb8rQI -->
-        <div data-role="page" data-theme="b" id="loginPage">
-            <div data-role="header" data-theme="b">
-                <h2> Pootle Login </h2>
-            </div>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.4.4.min.js"></script>
+    <script type="text/javascript">
+        app.initialize();
+    </script>
+</head>
+<body>
 
-            <div data-role="content" data-theme="b" id="Login_Content">
-                <input type="text" id="username" placeholder="Kullanıcı Adı">
-                <input type="password" id="password" placeholder="Parola :)">
-                <button type="button" value="Button" onclick="startApp()"> Login </button>
-            </div>
-        </div>
+<div data-role="page" data-theme="b" id="loginPage">
+    <div data-role="header" data-theme="b">
+        <h1> Pootle Giriş </h1>
+    </div>
 
-        <div data-role="page" data-theme="b" id="languagesPage">
+    <div data-role="content" data-theme="b" id="Login_Content">
+        <input type="text" id="username" placeholder="Kullanıcı Adı" >
+        <input type="password" id="password" placeholder="Parola :)" >
+        <button type="button" value="Button" onclick="startApp()"> Login </button>
+    </div>
+</div>
 
-           <div data-role="collapsible" data-theme="b" data-content-theme="b" >
-                <h2 > Languages </h2>
-                <div id="Languages_Content" ></div>
-            </div>
+<div data-role="page" data-theme="b" id="languagesPage">
+    <div data-role="header" data-position="fixed">
+        <h1> Diller </h1>
+    </div>
+    <ul id="Languages_Content" data-role="listview" data-theme="b"></ul>
+</div>
 
-        </div>
+<div data-role="page" data-theme="b" id="projectsPage">
+    <div data-role="header" data-add-back-btn="true" data-back-btn-text="Geri" data-position="fixed">
+        <h1> Projeler </h1>
+    </div>
+    <ul id="Projects_Content" data-role="listview" data-theme="b" data-inset="true"></ul>
 
-        <div data-role="page" data-theme="b" id="projectsPage">
+</div>
 
-            <div data-role="collapsible" data-theme="b" data-content-theme="b" >
-                <h2 > Projects </h2>
-                <div id="Projects_Content" ></div>
-            </div>
-
-        </div>
-
-        <div data-role="page" data-theme="b" id="filesPage">
-
-            <div data-role="collapsible" data-theme="b" data-content-theme="b" >
-                <h2 > Files </h2>
-                <div id="Files_Content" ></div>
-            </div>
-
-        </div>
-
-
-
-
-
-
-
-    </body>
-</html>
+<div data-role="page" data-theme="b" id="filesPage">
+    <div data-role="header" data-add-back-btn="true" data-back-btn-text="Geri" data-position="fixed">
+        <h1> Dosyalar </h1>
+    </div>
+    <table id="fileTable" data-role="table" data-mode="column">
+        <thead>
+        <tr>
+            <th>Dosya Adı</th>
+            <th>Ilerleme</th>
+        </tr>
+        </thead>
+        <tbody id="Files_Content"></tbody>
+    </table>
+</div>
