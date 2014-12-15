@@ -122,6 +122,29 @@ function startApp() {
 
         $('.store').on("tap", function() {
             selectedStoreIndex = $(this).attr("data-code");
+            $.mobile.changePage( "#aboutFilePage");
+        });
+    });
+
+    $(document).on("pageshow","#aboutFilePage",function() {
+        var stores = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores;
+        var markup = '';
+        for (var i = 0; i < stores.length; i++) {
+            //var progress = stores[i]['statistics']['translated']['percentage'];
+            console.log(stores[i].statistics.total.words);
+            console.log(stores[i].statistics.untranslated.words);
+            var total = stores[i].statistics.total.words;
+            var needtranslate = stores[i].statistics.untranslated.words;
+            markup += '<tr><td><a class="store" data-code="' + i +'">' + total + '</a></td>' +
+                '<td>'+needtranslate+'</td></tr>';
+        }
+
+        $('#AboutFiles_Content').html(markup);
+        $("#AboutFileTable").table( "refresh" );
+
+
+        $('.store').on("tap", function() {
+            selectedStoreIndex = $(this).attr("data-code");
             $.mobile.changePage( "#translatePage");
         });
     });
