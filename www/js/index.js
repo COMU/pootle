@@ -48,9 +48,21 @@ var app = {
     }
 };
 
+$(document).on("pagebeforeshow", "#loginPage",function() {
+    if (window.localStorage.getItem("username") && window.localStorage.getItem("password")) {
+        startApp();
+    }
+});
+
 var apiRoot = 'http://api.ozdincer.com';
 var projects = [];
 function startApp() {
+    if ($('#remember').is(':checked')) {
+        // save username and password
+        window.localStorage.setItem("username", $('#username').val());
+        window.localStorage.setItem("password", $('#password').val());
+    }
+
     request(apiRoot + '/api/v1/languages/', function(data){
         projects = data.objects;
         $.mobile.changePage( "#languagesPage");
@@ -59,8 +71,8 @@ function startApp() {
             'Kullanici adi veya parola hatali',  // message
             'Dikkat!!',            // title
             'Opps'                  // buttonName
-        );});
-
+        );
+    });
 
     var selectedlanguage = '';
     var selectedlanguageIndex = 0;
@@ -105,6 +117,7 @@ function startApp() {
                 $.mobile.changePage( "#filesPage");
             });
         });
+    });
 
     $(document).on("pageshow","#filesPage",function() {
         var stores = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores;
@@ -112,7 +125,7 @@ function startApp() {
         var markup = '';
         for (var i = 0; i < stores.length; i++) {
             var progress = stores[i]['statistics']['translated']['percentage'];
-            markup += '<tr><td><a class="store" data-code="' + i +'">' + stores[i].name.slice(0,10) + '</a></td>' +
+            markup += '<tr><td><a class="store" data-code="' + i +'">' + stores[i].name + '</a></td>' +
                 '<td><progress value="'+ progress +'" max="100"></progress></td></tr>';
         }
 
@@ -127,18 +140,18 @@ function startApp() {
     });
 
     $(document).on("pageshow","#aboutFilePage",function() {
-        var stores = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores;
+        var store = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex];
+        console.log(store)
         var markup = '';
-        for (var i = 0; i < stores.length; i++) {
-            //var progress = stores[i]['statistics']['translated']['percentage'];
-            console.log(stores[i].statistics.total.words);
-            console.log(stores[i].statistics.untranslated.words);
-            var total = stores[i].statistics.total.words;
-            var needtranslate = stores[i].statistics.untranslated.words;
-            markup += '<tr><td><a class="store" data-code="' + i +'">' + total + '</a></td>' +
-                '<td>'+needtranslate+'</td></tr>';
-        }
+        var markup2 = '';
 
+        var total = store.statistics.total.words;
+        var needtranslate = store.statistics.untranslated.words;
+        markup2 += store.name;
+        markup += '<tr><td><a class="store">' + total + '</a></td>' +
+            '<td>'+needtranslate+'</td></tr>';
+
+        $('#FileName').html(markup2);
         $('#AboutFiles_Content').html(markup);
         $("#AboutFileTable").table( "refresh" );
 
@@ -148,10 +161,6 @@ function startApp() {
             $.mobile.changePage( "#translatePage");
         });
     });
-
-
-
-});
 
 
 }
@@ -206,12 +215,12 @@ function updateStores(i, j, k, url, callback) {
 };
 
 function request(url, successCallback, errorCallback) {
-    var username = document.getElementById("username").value;
-    var password = document.getElementById("password").value;
+    var username = window.localStorage.getItem("username") || document.getElementById("username").value;
+    var password = window.localStorage.getItem("password") || document.getElementById("password").value;
     $.ajax({
         type: "GET",
         url: url,
-        dataType: 'jsonp',
+        dataType: 'json',
         async: false,
         data: '{}',
         beforeSend: function (xhr) {
