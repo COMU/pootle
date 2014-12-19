@@ -98,21 +98,33 @@
 
 <<div data-role="page" data-theme="b" id="TranslatePage">
     <div  data-role="header" data-add-back-btn="true" data-back-btn-text="Geri" data-position="fixed">
-        <h1> Çevir </h1>
+        <h1 id="file_name"> </h1>
     </div>
     <div id="TranslateEnglish" >
 
     </div>
 
-    <div id="TranslateTurkish" class="ui-field-contain">
+    <div id="TranslateTurkish" >
 
 
     </div>
-    <fieldset data-role="controlgroup" data-type="vertical">
-        <input id="TranslateWork"  type="checkbox">
-        <label for="TranslateWork">Calisma Gerekli</label>
-    </fieldset>
-    <button type="button" value="Gonder" > Gönder </button>
-    <button type="button" value="Oner" > Öner </button>
-    <button id="sonraki" type="button" value="Sonraki" > Sonraki </button>
+    <table>
+        <tr>
+            <td>
+                <button id="gonder" type="button" value="Gonder" > Gönder </button>
+            </td>
+            <td>
+                <button type="button" value="Oner" > Öner </button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="onceki" type="button" value="Onceki">Önceki</button>
+            </td>
+            <td>
+                <button id="sonraki" type="button" value="Sonraki" > Sonraki </button>
+            </td>
+        </tr>
+    </table>
+
 </div>

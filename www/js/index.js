@@ -170,12 +170,15 @@ function startApp() {
     $(document).on("pageshow","#TranslatePage",function() {
 
         var units = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units;
+        var store = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex];
 
-        var markup = '<textarea class="TranslateTurkish" > ' + units[i].target_f + ' </textarea>';
+        var markup = '<textarea id="textarea" class="TranslateTurkish" > ' + units[i].target_f + ' </textarea>';
         var markup2 = '<p class="TranslateEnglish">' + units[i].source_f + '</p>'
+        var markup3 = store.name;
 
         $('#TranslateTurkish').html(markup);
         $('#TranslateEnglish').html(markup2);
+        $('#file_name').html(markup3);
 
         $('#sonraki').on("tap", function() {
             i=i+1;
@@ -188,6 +191,20 @@ function startApp() {
                 $('#TranslateEnglish').html(markup2);
             });
         });
+
+        $('#onceki').on("tap", function() {
+            if(i>0) {
+                i = i - 1;
+                var unit = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units[i];
+                markup = '<textarea class="TranslateTurkish" > ' + unit.target_f + ' </textarea>';
+                markup2 = '<p class="TranslateEnglish">' + unit.source_f + '</p>';
+
+                $('#TranslateTurkish').html(markup);
+                $('#TranslateEnglish').html(markup2);
+                console.log(projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units[i]);
+            }
+        });
+
 
     });
 
@@ -259,7 +276,7 @@ function request(url, successCallback, errorCallback) {
     $.ajax({
         type: "GET",
         url: url,
-        dataType: 'json',
+        dataType: 'jsonp',
         async: false,
         data: '{}',
         beforeSend: function (xhr) {

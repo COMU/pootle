@@ -175,3 +175,11 @@ progress {
     margin: 20px 0;
 }
 
+textarea {
+    width: 100%;
+}
+
+table {
+    width: 100%;
+}
+
