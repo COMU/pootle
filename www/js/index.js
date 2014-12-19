@@ -78,6 +78,7 @@ function startApp() {
     var selectedlanguageIndex = 0;
     var selectedProjectIndex = 0;
     var selectedStoreIndex = 0;
+    var selectedUnitIndex = 0;
 
     $(document).on("pageshow", "#languagesPage",function() {
         var markup = '';
@@ -146,24 +147,62 @@ function startApp() {
         var markup2 = '';
 
         var total = store.statistics.total.words;
+        console.log(total);
         var needtranslate = store.statistics.untranslated.words;
         markup2 += store.name;
-        markup += '<tr><td><a class="store">' + total + '</a></td>' +
-            '<td>'+needtranslate+'</td></tr>';
+        markup += '<tr><td><a class="total" >' + total + '</a></td>' +
+            '<td><a class="untranslated" >'+needtranslate+'</a></td></tr>';
 
         $('#FileName').html(markup2);
         $('#AboutFiles_Content').html(markup);
         $("#AboutFileTable").table( "refresh" );
 
 
-        $('.store').on("tap", function() {
-            selectedStoreIndex = $(this).attr("data-code");
-            $.mobile.changePage( "#translatePage");
+        $('.total').on("tap", function() {
+            getSelectedUnitData(selectedlanguageIndex, selectedProjectIndex, selectedStoreIndex, selectedUnitIndex, function() {
+                $.mobile.changePage( "#TranslatePage");
+            });
         });
+    });
+
+    var i=0;
+
+    $(document).on("pageshow","#TranslatePage",function() {
+
+        var units = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units;
+
+        var markup = '<textarea class="TranslateTurkish" > ' + units[i].target_f + ' </textarea>';
+        var markup2 = '<p class="TranslateEnglish">' + units[i].source_f + '</p>'
+
+        $('#TranslateTurkish').html(markup);
+        $('#TranslateEnglish').html(markup2);
+
+        $('#sonraki').on("tap", function() {
+            i=i+1;
+            getSelectedUnitData(selectedlanguageIndex, selectedProjectIndex, selectedStoreIndex, i, function() {
+                var unit = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units[i];
+                markup = '<textarea class="TranslateTurkish" > ' + unit.target_f + ' </textarea>';
+                markup2 = '<p class="TranslateEnglish">' + unit.source_f + '</p>';
+
+                $('#TranslateTurkish').html(markup);
+                $('#TranslateEnglish').html(markup2);
+            });
+        });
+
     });
 
 
 }
+
+function getSelectedUnitData(languageindex, projectindex, storeindex, unitindex, callback) {
+    var units = projects[languageindex]['translation_projects'][projectindex]['stores'][storeindex]['units'][unitindex];
+
+    request(apiRoot +units, function(data) {
+        projects[languageindex]['translation_projects'][projectindex]['stores'][storeindex]['units'][unitindex] = data;
+        callback();
+    });
+}
+
 
 function getSelectedLanguageData(languageIndex, callback) {
     var language = projects[languageIndex];
