@@ -54,6 +54,10 @@ $(document).on("pagebeforeshow", "#loginPage",function() {
     }
 });
 
+var username = window.localStorage.getItem("username") || document.getElementById("username").value;
+var password = window.localStorage.getItem("password") || document.getElementById("password").value;
+
+
 var apiRoot = 'http://api.ozdincer.com';
 var projects = [];
 function startApp() {
@@ -205,6 +209,79 @@ function startApp() {
             }
         });
 
+        $('#gonder').on("tap", function() {
+            console.log(units[i].resource_uri);
+            units[i].target_f = document.getElementById('textarea').value;
+
+            $.ajax({
+                type: 'PUT',
+                url: apiRoot + units[i].resource_uri,
+                contentType: 'application/json',
+
+                headers: {
+                    "Authorization": "Basic " + btoa(username + ":" + password )
+                },
+                data: JSON.stringify({
+                    "target_f": units[i].target_f,
+                    "target_length": units[i].target_f.split('').length,
+                    "target_wordcount": units[i].target_f.split(' ').length,
+                    "translator_comment": units[i].translator_comment,
+                    "suggestions": ""}),
+
+                success: function(data) {
+                    alert("tamam")
+                    callback();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                },
+                dataType: 'json'
+            });
+
+
+        });
+
+        $('#oner').on("tap", function() {
+            console.log(units.length);
+            console.log(units[0]);
+            var count=0;
+
+
+            console.log(units[0].suggestions.length)
+            console.log(count);
+            console.log(units[i].suggestions);
+
+            $.ajax({
+                type: 'POST',
+                url: apiRoot +'/api/v1/suggestions/',
+                contentType: 'application/json',
+
+                headers: {
+                    "Authorization": "Basic " + btoa(username + ":" + password )
+                },
+                data: JSON.stringify({
+                    "target_f": units[i].target_f,
+                    "translator_comment_f": units[i].translator_comment,
+                    "unit": units[i]
+                }),
+
+                success: function(data) {
+                    alert("tamam")
+                    callback();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                },
+                dataType: 'json'
+            });
+
+
+        });
+
+
+
 
     });
 
@@ -270,13 +347,12 @@ function updateStores(i, j, k, url, callback) {
     });
 };
 
+
 function request(url, successCallback, errorCallback) {
-    var username = window.localStorage.getItem("username") || document.getElementById("username").value;
-    var password = window.localStorage.getItem("password") || document.getElementById("password").value;
     $.ajax({
         type: "GET",
         url: url,
-        dataType: 'jsonp',
+        dataType: 'json',
         async: false,
         data: '{}',
         beforeSend: function (xhr) {
@@ -286,9 +362,10 @@ function request(url, successCallback, errorCallback) {
         error: errorCallback
     });
 
-    function make_base_auth(user, password) {
-        var tok = user + ':' + password;
-        var hash = btoa(tok);
-        return "Basic " + hash;
-    };
 }
+
+function make_base_auth(user, password) {
+    var tok = user + ':' + password;
+    var hash = btoa(tok);
+    return "Basic " + hash;
+};
