@@ -184,7 +184,7 @@ function startApp() {
         $('#TranslateEnglish').html(markup2);
         $('#file_name').html(markup3);
 
-        $('#sonraki').on("tap", function() {
+        function sonraki() {
             i=i+1;
             getSelectedUnitData(selectedlanguageIndex, selectedProjectIndex, selectedStoreIndex, i, function() {
                 var unit = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units[i];
@@ -194,7 +194,8 @@ function startApp() {
                 $('#TranslateTurkish').html(markup);
                 $('#TranslateEnglish').html(markup2);
             });
-        });
+        };
+
 
         $('#onceki').on("tap", function() {
             if(i>0) {
@@ -208,6 +209,11 @@ function startApp() {
                 console.log(projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units[i]);
             }
         });
+
+        $('#sonraki').on("tap", function() {
+            sonraki();
+        });
+
 
         $('#gonder').on("tap", function() {
             console.log(units[i].resource_uri);
@@ -229,8 +235,9 @@ function startApp() {
                     "suggestions": ""}),
 
                 success: function(data) {
-                    alert("tamam")
-                    callback();
+                    alert("gonderildi");
+                    sonraki();
+
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     alert(xhr.status);
@@ -251,6 +258,7 @@ function startApp() {
             console.log(units[0].suggestions.length)
             console.log(count);
             console.log(units[i].suggestions);
+            units[i].target_f = document.getElementById('textarea').value;
 
             $.ajax({
                 type: 'POST',
@@ -261,6 +269,7 @@ function startApp() {
                     "Authorization": "Basic " + btoa(username + ":" + password )
                 },
                 data: JSON.stringify({
+                    "resource_uri": ,
                     "target_f": units[i].target_f,
                     "translator_comment_f": units[i].translator_comment,
                     "unit": units[i]
