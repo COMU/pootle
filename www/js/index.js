@@ -153,9 +153,11 @@ function startApp() {
         var total = store.statistics.total.words;
         console.log(total);
         var needtranslate = store.statistics.untranslated.words;
+        var suggestions = store.statistics.suggestions;
         markup2 += store.name;
         markup += '<tr><td><a class="total" >' + total + '</a></td>' +
-            '<td><a class="untranslated" >'+needtranslate+'</a></td></tr>';
+            '<td><a class="untranslated" >'+needtranslate+'</a></td>' +
+            '<td><a class="suggestions" >'+suggestions+'</a></td></tr>';
 
         $('#FileName').html(markup2);
         $('#AboutFiles_Content').html(markup);
@@ -163,6 +165,12 @@ function startApp() {
 
 
         $('.total').on("tap", function() {
+            getSelectedUnitData(selectedlanguageIndex, selectedProjectIndex, selectedStoreIndex, selectedUnitIndex, function() {
+                $.mobile.changePage( "#TranslatePage");
+            });
+        });
+
+        $('.untranslated').on("tap", function() {
             getSelectedUnitData(selectedlanguageIndex, selectedProjectIndex, selectedStoreIndex, selectedUnitIndex, function() {
                 $.mobile.changePage( "#TranslatePage");
             });
@@ -251,7 +259,7 @@ function startApp() {
 
         $('#oner').on("tap", function() {
             console.log(units.length);
-            console.log(units[0]);
+            console.log(units[i]);
             var count=0;
 
 
@@ -269,15 +277,14 @@ function startApp() {
                     "Authorization": "Basic " + btoa(username + ":" + password )
                 },
                 data: JSON.stringify({
-                    "resource_uri": ,
                     "target_f": units[i].target_f,
                     "translator_comment_f": units[i].translator_comment,
-                    "unit": units[i]
+                    "unit": units[i].resource_uri
                 }),
 
                 success: function(data) {
-                    alert("tamam")
-                    callback();
+                    alert("tamam");
+                    sonraki();
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     alert(xhr.status);
@@ -361,7 +368,7 @@ function request(url, successCallback, errorCallback) {
     $.ajax({
         type: "GET",
         url: url,
-        dataType: 'json',
+        dataType: 'jsonp',
         async: false,
         data: '{}',
         beforeSend: function (xhr) {
