@@ -46,7 +46,11 @@ var app = {
 
         console.log('Received Event: ' + id);
     }
+
 };
+var i= 0;
+var j=0;
+var k=0;
 
 $(document).on("pagebeforeshow", "#loginPage",function() {
     if (window.localStorage.getItem("username") && window.localStorage.getItem("password")) {
@@ -172,12 +176,139 @@ function startApp() {
 
         $('.untranslated').on("tap", function() {
             getSelectedUnitData(selectedlanguageIndex, selectedProjectIndex, selectedStoreIndex, selectedUnitIndex, function() {
-                $.mobile.changePage( "#TranslatePage");
+                $.mobile.changePage( "#UntranslatedPage");
+            });
+        });
+
+        $('.suggestions').on("tap", function() {
+            getSelectedUnitData(selectedlanguageIndex, selectedProjectIndex, selectedStoreIndex, selectedUnitIndex, function() {
+                $.mobile.changePage( "#SuggestionPage");
             });
         });
     });
 
-    var i=0;
+
+    $(document).on("pageshow","#UntranslatedPage",function() {
+
+        var units = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units;
+        var store = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex];
+
+        var markup = '<textarea id="textarea" class="TranslateTurkish" > ' + units[k].target_f + ' </textarea>';
+        var markup2 = '<p class="TranslateEnglish">' + units[k].source_f + '</p>'
+        var markup3 = store.name;
+
+        $('#TranslateTurkish').html(markup);
+        $('#TranslateEnglish').html(markup2);
+        $('#file_name').html(markup3);
+
+        function sonraki() {
+            k=k+1;
+            getSelectedUnitData(selectedlanguageIndex, selectedProjectIndex, selectedStoreIndex, k, function() {
+                var unit = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units[k];
+                markup = '<textarea class="TranslateTurkish" > ' + unit.target_f + ' </textarea>';
+                markup2 = '<p class="TranslateEnglish">' + unit.source_f + '</p>';
+
+                $('#TranslateTurkish').html(markup);
+                $('#TranslateEnglish').html(markup2);
+            });
+        };
+
+
+        $('#onceki').on("tap", function() {
+            if(k>0) {
+                k = k - 1;
+                var unit = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units[k];
+                markup = '<textarea class="TranslateTurkish" > ' + unit.target_f + ' </textarea>';
+                markup2 = '<p class="TranslateEnglish">' + unit.source_f + '</p>';
+
+                $('#TranslateTurkish').html(markup);
+                $('#TranslateEnglish').html(markup2);
+                console.log(projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units[k]);
+            }
+        });
+
+        $('#sonraki').on("tap", function() {
+            sonraki();
+        });
+
+
+        $('#gonder').on("tap", function() {
+            console.log(units[k].resource_uri);
+            units[k].target_f = document.getElementById('textarea').value;
+
+            $.ajax({
+                type: 'PUT',
+                url: apiRoot + units[k].resource_uri,
+                contentType: 'application/json',
+
+                headers: {
+                    "Authorization": "Basic " + btoa(username + ":" + password )
+                },
+                data: JSON.stringify({
+                    "target_f": units[k].target_f,
+                    "target_length": units[k].target_f.split('').length,
+                    "target_wordcount": units[k].target_f.split(' ').length,
+                    "translator_comment": units[k].translator_comment,
+                    "suggestions": ""}),
+
+                success: function(data) {
+                    alert("gonderildi");
+                    sonraki();
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                },
+                dataType: 'json'
+            });
+
+
+        });
+
+        $('#oner').on("tap", function() {
+            console.log(units.length);
+            console.log(units[k]);
+            var count=0;
+
+
+            console.log(units[0].suggestions.length)
+            console.log(count);
+            console.log(units[k].suggestions);
+            units[k].target_f = document.getElementById('textarea').value;
+
+            $.ajax({
+                type: 'POST',
+                url: apiRoot +'/api/v1/suggestions/',
+                contentType: 'application/json',
+
+                headers: {
+                    "Authorization": "Basic " + btoa(username + ":" + password )
+                },
+                data: JSON.stringify({
+                    "target_f": units[k].target_f,
+                    "translator_comment_f": units[k].translator_comment,
+                    "unit": units[k].resource_uri
+                }),
+
+                success: function(data) {
+                    alert("tamam");
+                    sonraki();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                },
+                dataType: 'json'
+            });
+
+
+        });
+
+
+
+
+    });
 
     $(document).on("pageshow","#TranslatePage",function() {
 
@@ -280,6 +411,128 @@ function startApp() {
                     "target_f": units[i].target_f,
                     "translator_comment_f": units[i].translator_comment,
                     "unit": units[i].resource_uri
+                }),
+
+                success: function(data) {
+                    alert("tamam");
+                    sonraki();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                },
+                dataType: 'json'
+            });
+
+
+        });
+
+
+
+
+    });
+
+    $(document).on("pageshow","#SuggestionPage",function() {
+
+        var units = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units;
+        var store = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex];
+
+        var markup = '<textarea id="textarea" class="TranslateTurkish" > ' + units[j].target_f + ' </textarea>';
+        var markup2 = '<p class="TranslateEnglish">' + units[i].source_f + '</p>'
+        var markup3 = store.name;
+
+        $('#TranslateTurkish').html(markup);
+        $('#TranslateEnglish').html(markup2);
+        $('#file_name').html(markup3);
+
+        function sonraki() {
+            j=j+1;
+            getSelectedUnitData(selectedlanguageIndex, selectedProjectIndex, selectedStoreIndex, j, function() {
+                var unit = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units[i];
+                markup = '<textarea class="TranslateTurkish" > ' + unit.target_f + ' </textarea>';
+                markup2 = '<p class="TranslateEnglish">' + unit.source_f + '</p>';
+
+                $('#TranslateTurkish').html(markup);
+                $('#TranslateEnglish').html(markup2);
+            });
+        };
+
+
+        $('#onceki').on("tap", function() {
+            if(j>0) {
+                j = j - 1;
+                var unit = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units[j];
+                markup = '<textarea class="TranslateTurkish" > ' + unit.target_f + ' </textarea>';
+                markup2 = '<p class="TranslateEnglish">' + unit.source_f + '</p>';
+
+                $('#TranslateTurkish').html(markup);
+                $('#TranslateEnglish').html(markup2);
+                console.log(projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units[j]);
+            }
+        });
+
+        $('#sonraki').on("tap", function() {
+            sonraki();
+        });
+
+
+        $('#gonder').on("tap", function() {
+            console.log(units[j].resource_uri);
+            units[j].target_f = document.getElementById('textarea').value;
+
+            $.ajax({
+                type: 'PUT',
+                url: apiRoot + units[j].resource_uri,
+                contentType: 'application/json',
+
+                headers: {
+                    "Authorization": "Basic " + btoa(username + ":" + password )
+                },
+                data: JSON.stringify({
+                    "target_f": units[j].target_f,
+                    "target_length": units[j].target_f.split('').length,
+                    "target_wordcount": units[j].target_f.split(' ').length,
+                    "translator_comment": units[j].translator_comment,
+                    "suggestions": ""}),
+
+                success: function(data) {
+                    alert("gonderildi");
+                    sonraki();
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                },
+                dataType: 'json'
+            });
+
+
+        });
+
+        $('#oner').on("tap", function() {
+            console.log(units.length);
+            console.log(units[j]);
+            var count=0;
+
+
+            console.log(units[0].suggestions.length)
+            console.log(count);
+            console.log(units[j].suggestions);
+            units[j].target_f = document.getElementById('textarea').value;
+
+            $.ajax({
+                type: 'POST',
+                url: apiRoot +'/api/v1/suggestions/',
+                contentType: 'application/json',
+
+                headers: {
+                    "Authorization": "Basic " + btoa(username + ":" + password )
+                },
+                data: JSON.stringify({
+                    "target_f": units[i].target_f,
+                    "translator_comment_f": units[j].translator_comment,
+                    "unit": units[j].resource_uri
                 }),
 
                 success: function(data) {
