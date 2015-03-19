@@ -51,6 +51,7 @@ var app = {
 var i= 0;
 var j=0;
 var k=0;
+arr = [];
 
 $(document).on("pagebeforeshow", "#loginPage",function() {
     if (window.localStorage.getItem("username") && window.localStorage.getItem("password")) {
@@ -87,6 +88,7 @@ function startApp() {
     var selectedProjectIndex = 0;
     var selectedStoreIndex = 0;
     var selectedUnitIndex = 0;
+    var selectedSugIndex = 0;
 
     $(document).on("pageshow", "#languagesPage",function() {
         var markup = '';
@@ -155,12 +157,14 @@ function startApp() {
         var markup2 = '';
 
         var total = store.statistics.total.words;
+        var fuzzy = store.statistics.fuzzy.words;
         console.log(total);
         var needtranslate = store.statistics.untranslated.words;
         var suggestions = store.statistics.suggestions;
         markup2 += store.name;
         markup += '<tr><td><a class="total" >' + total + '</a></td>' +
-            '<td><a class="untranslated" >'+needtranslate+'</a></td>';
+            '<td><a class="untranslated" >'+needtranslate+'</a></td>' +
+            '<td><a class="fuzzy" >'+fuzzy+'</a></td>';
 
         $('#FileName').html(markup2);
         $('#AboutFiles_Content').html(markup);
@@ -174,10 +178,18 @@ function startApp() {
         });
 
         $('.untranslated').on("tap", function() {
-            getSelectedStateData(selectedlanguageIndex, selectedProjectIndex, selectedStoreIndex, selectedUnitIndex, function() {
+            getSelectedStateData(selectedlanguageIndex, selectedProjectIndex, selectedStoreIndex, selectedUnitIndex,  function() {
                 $.mobile.changePage( "#TranslatePage");
             });
         });
+
+        $('.fuzzy').on("tap", function() {
+            getSelectedFuzzyData(selectedlanguageIndex, selectedProjectIndex, selectedStoreIndex, selectedUnitIndex, function() {
+                $.mobile.changePage( "#TranslatePage");
+            });
+        });
+
+
 
     });
 
@@ -185,9 +197,9 @@ function startApp() {
    $(document).on("pageshow","#TranslatePage",function() {
 
         var units = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units;
+        console.log(units);
         var store = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex];
 
-        console.log(projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units);
         console.log(units[i])
         var markup = '<textarea id="textarea" class="TranslateTurkish" > ' + units[i].target_f + ' </textarea>';
         var markup2 = '<p class="TranslateEnglish">' + units[i].source_f + '</p>'
@@ -199,19 +211,30 @@ function startApp() {
 
         function sonraki() {
             i=i+1;
-            getSelectedUnitData(selectedlanguageIndex, selectedProjectIndex, selectedStoreIndex, i, function() {
+           /* getSelectedUnitData(selectedlanguageIndex, selectedProjectIndex, selectedStoreIndex, i, function() {
+            var unit = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units[i];
+            markup = '<textarea class="TranslateTurkish" > ' + unit.target_f + ' </textarea>';
+            markup2 = '<p class="TranslateEnglish">' + unit.source_f + '</p>';
+
+            $('#TranslateTurkish').html(markup);
+            $('#TranslateEnglish').html(markup2);
+            });*/
+
+            getSelectedStateData(selectedlanguageIndex, selectedProjectIndex, selectedStoreIndex, i, function() {
                 var unit = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units[i];
+                console.log(arr)
                 markup = '<textarea class="TranslateTurkish" > ' + unit.target_f + ' </textarea>';
                 markup2 = '<p class="TranslateEnglish">' + unit.source_f + '</p>';
 
                 $('#TranslateTurkish').html(markup);
                 $('#TranslateEnglish').html(markup2);
             });
+
         };
 
 
         $('#onceki').on("tap", function() {
-            if(i>0) {
+            /*if(i>0) {
                 i = i - 1;
                 var unit = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units[i];
                 markup = '<textarea class="TranslateTurkish" > ' + unit.target_f + ' </textarea>';
@@ -220,7 +243,22 @@ function startApp() {
                 $('#TranslateTurkish').html(markup);
                 $('#TranslateEnglish').html(markup2);
                 console.log(projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units[i]);
-            }
+            }*/
+
+            if(arr.length>0) {
+                i = arr[arr.length -1];
+                var unit = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units[i];
+                markup = '<textarea class="TranslateTurkish" > ' + unit.target_f + ' </textarea>';
+                markup2 = '<p class="TranslateEnglish">' + unit.source_f + '</p>';
+
+                $('#TranslateTurkish').html(markup);
+                $('#TranslateEnglish').html(markup2);
+                arr.pop(arr.length -1);
+                console.log(arr);
+                console.log(projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units[i]);
+            };
+
+
         });
 
         $('#sonraki').on("tap", function() {
@@ -304,13 +342,175 @@ function startApp() {
 
 
 
+
+
     });
+
+   /* $(document).on("pageshow","#UnTranslatePage",function() {
+
+        var units = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units;
+        console.log(units);
+        var store = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex];
+
+        console.log(units[j])
+        var markup = '<textarea id="textarea" class="TranslateTurkish" > ' + units[j].target_f + ' </textarea>';
+        var markup2 = '<p class="TranslateEnglish">' + units[j].source_f + '</p>'
+        var markup3 = store.name;
+
+        $('#TranslateTurkish').html(markup);
+        $('#TranslateEnglish').html(markup2);
+        $('#file_name').html(markup3);
+
+        function sonraki() {
+            j=j+1;
+            getSelectedStateData(selectedlanguageIndex, selectedProjectIndex, selectedStoreIndex, j, function() {
+                var unit = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units[j];
+                markup = '<textarea class="TranslateTurkish" > ' + unit.target_f + ' </textarea>';
+                markup2 = '<p class="TranslateEnglish">' + unit.source_f + '</p>';
+
+                $('#TranslateTurkish').html(markup);
+                $('#TranslateEnglish').html(markup2);
+            });
+        };
+
+
+        $('#onceki').on("tap", function() {
+            if(j>0) {
+                j = j - 1;
+                var unit = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units[j];
+                markup = '<textarea class="TranslateTurkish" > ' + unit.target_f + ' </textarea>';
+                markup2 = '<p class="TranslateEnglish">' + unit.source_f + '</p>';
+
+                $('#TranslateTurkish').html(markup);
+                $('#TranslateEnglish').html(markup2);
+                console.log(projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units[j]);
+            }
+        });
+
+        $('#sonraki').on("tap", function() {
+            sonraki();
+        });
+
+
+        $('#gonder').on("tap", function() {
+            console.log(units[j].resource_uri);
+            units[j].target_f = document.getElementById('textarea').value;
+
+            $.ajax({
+                type: 'PUT',
+                url: apiRoot + units[j].resource_uri,
+                contentType: 'application/json',
+
+                headers: {
+                    "Authorization": "Basic " + btoa(username + ":" + password )
+                },
+                data: JSON.stringify({
+                    "target_f": units[j].target_f,
+                    "target_length": units[j].target_f.split('').length,
+                    "target_wordcount": units[j].target_f.split(' ').length,
+                    "translator_comment": units[j].translator_comment,
+                    "suggestions": ""}),
+
+                success: function(data) {
+                    alert("gonderildi");
+                    sonraki();
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                },
+                dataType: 'json'
+            });
+
+
+        });
+
+        $('#oner').on("tap", function() {
+            console.log(units.length);
+            console.log(units[j]);
+            var count=0;
+
+
+            console.log(units[0].suggestions.length)
+            console.log(count);
+            console.log(units[j].suggestions);
+            units[i].target_f = document.getElementById('textarea').value;
+
+            $.ajax({
+                type: 'POST',
+                url: apiRoot +'/api/v1/suggestions/',
+                contentType: 'application/json',
+
+                headers: {
+                    "Authorization": "Basic " + btoa(username + ":" + password )
+                },
+                data: JSON.stringify({
+                    "target_f": units[j].target_f,
+                    "translator_comment_f": units[j].translator_comment,
+                    "unit": units[j].resource_uri
+                }),
+
+                success: function(data) {
+                    alert("tamam");
+                    sonraki();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                },
+                dataType: 'json'
+            });
+
+
+        });
+
+
+
+
+
+
+    });*/
+
 
 
 
 }
 
 function getSelectedStateData(languageindex, projectindex, storeindex, unitindex, callback) {
+    var unitsUrl = projects[languageindex]['translation_projects'][projectindex]['stores'][storeindex]['units'][unitindex];
+
+
+    console.log(unitsUrl);
+    request(apiRoot +unitsUrl, function(data) {
+        units = data;
+        console.log(units);
+        var state = units.state;
+        var sug = units.suggestions;
+
+        console.log(state)
+
+        if (state != 0) {
+            unitindex = unitindex + 1;
+            getSelectedStateData(languageindex,projectindex, storeindex, unitindex, callback);
+            console.log(projects[languageindex]['translation_projects'][projectindex]['stores'][storeindex]['units'][unitindex]);
+            console.log(unitindex);
+        } else {
+            projects[languageindex]['translation_projects'][projectindex]['stores'][storeindex]['units'][unitindex] = units;
+            i=unitindex;
+            arr.push(i);
+
+            callback();
+
+        }
+        projects[languageindex]['translation_projects'][projectindex]['stores'][storeindex]['units'][unitindex] = data;
+
+    });
+}
+
+
+
+function getSelectedFuzzyData(languageindex, projectindex, storeindex, unitindex, callback) {
     var unitsUrl = projects[languageindex]['translation_projects'][projectindex]['stores'][storeindex]['units'][unitindex];
 
     console.log(unitsUrl);
@@ -320,22 +520,25 @@ function getSelectedStateData(languageindex, projectindex, storeindex, unitindex
         var state = units.state;
         console.log(state)
 
-        if (state != 0) {
+        if (state == 50) {
+            projects[languageindex]['translation_projects'][projectindex]['stores'][storeindex]['units'][unitindex] = units;
+            i=unitindex;
+            callback();
+
+        } else {
             unitindex = unitindex + 1;
             getSelectedStateData(languageindex,projectindex, storeindex, unitindex, callback);
             console.log(projects[languageindex]['translation_projects'][projectindex]['stores'][storeindex]['units'][unitindex]);
             console.log(unitindex);
-        } else {
-            console.log("ess");
-            console.log(units);
-            projects[languageindex]['translation_projects'][projectindex]['stores'][storeindex]['units'][unitindex] = units;
-            callback();
+
 
         }
         projects[languageindex]['translation_projects'][projectindex]['stores'][storeindex]['units'][unitindex] = data;
 
     });
 }
+
+
 
 function getSelectedUnitData(languageindex, projectindex, storeindex, unitindex, callback) {
     var units = projects[languageindex]['translation_projects'][projectindex]['stores'][storeindex]['units'][unitindex];
@@ -347,7 +550,6 @@ function getSelectedUnitData(languageindex, projectindex, storeindex, unitindex,
         callback();
     });
 }
-
 
 function getSelectedLanguageData(languageIndex, callback) {
     var language = projects[languageIndex];
