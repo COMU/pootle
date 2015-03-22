@@ -68,8 +68,8 @@ var projects = [];
 function startApp() {
     if ($('#remember').is(':checked')) {
         // save username and password
-        window.localStorage.setItem("username", $('#username').val());
-        window.localStorage.setItem("password", $('#password').val());
+        //window.localStorage.setItem("username", $('#username').val());
+        //window.localStorage.setItem("password", $('#password').val());
     }
 
     request(apiRoot + '/api/v1/languages/', function(data){
