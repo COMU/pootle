@@ -53,6 +53,7 @@ var j=0;
 var k=0;
 arr = [];
 
+
 $(document).on("pagebeforeshow", "#loginPage",function() {
     if (window.localStorage.getItem("username") && window.localStorage.getItem("password")) {
         startApp();

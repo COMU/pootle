@@ -31,17 +31,42 @@
     <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="js/jquery.mobile-1.4.4.min.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
+    <script src="js/lang.js"></script>
     <script type="text/javascript">
         app.initialize();
+
+        function pageLoaded()
+        {
+            var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
+            db.transaction(queryDB,errorCB);
+        }
+
+        function errorCB(err) {
+            alert("Error processing SQL: "+err.code);
+        }
+
+        //select all from SoccerPlayer
+        function queryDB(tx){
+            tx.executeSql('SELECT * FROM USER',[],querySuccess,errorCB);
+        }
+
+        function querySuccess(tx,result){
+            $('#divList').empty();
+
+            for(var i = 0; i < result.rows.length; i++)
+            {
+                var row = result.rows.item(i);
+                $('#divList').append('<li><a href="#">User Name <h3 class="ui-li-heading">'+row['username']+'</h3><p class="ui-li-desc">Nick '+row['nickName']+'</p></a></li>');
+            }
+
+            $('#divList').listview();
+        }
+
     </script>
 </head>
-<body>
+<body onload="pageLoaded()">
 
-
-
-
-
-<div data-role="page" data-theme="b">
+<div data-role="page" data-theme="b" id="welcomepage">
 
     <div data-role="header" data-theme="b">
         <h1>Pootle</h1>
@@ -49,12 +74,18 @@
 
     <div role="main" class="ui-content" data-theme="b" id="loginnPage">
 
-        <h2 class="mc-text-center">Hoşgeldiniz!</h2>
+        <h2  class="mc-text-center" translate></h2>
 
 
-        <p class="mc-top-margin-1-5"><b>Hesabınız mı yok?</b></p>
+        <p tkey="dontaccount"class="mc-top-margin-1-5"><b></b></p>
 
-        <a href="sign-up.html" class="ui-btn ui-btn-b ui-corner-all">Yeni Kayıt</a>
+        <div id="divList">
+
+        </div>
+
+        <a id="newrecord" tkey="newrecord" href="Record.html" class="ui-btn ui-btn-b ui-corner-all"></a>
+
+
 
         <p></p>
 
@@ -62,60 +93,7 @@
 
 </div>
 
-<div data-role="page" data-theme="b">
 
-    <div data-role="header" data-theme="b">
-
-        <h1>Pootle</h1>
-
-    </div><!-- /header -->
-
-    <div role="main" class="ui-content">
-
-        <h3>Yeni Kayıt</h3>
-
-        <label for="txt-first-name">Mahlas</label>
-
-        <input type="text" name="txt-first-name" id="txt-first-name" value="">
-
-        <label for="txt-last-name">Sunucu Adresi</label>
-
-        <input type="text" name="txt-last-name" id="txt-last-name" value="">
-
-        <label for="txt-user">Kullanıcı Adı</label>
-
-        <input type="text" name="txt-user" id="txt-user" value="">
-
-        <label for="txt-password">Parola</label>
-
-        <input type="password" name="txt-password" id="txt-password" value="">
-
-
-        <a href="#dlg-sign-up-sent" data-rel="popup" data-transition="pop" data-position-to="window" id="btn-submit" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">Kaydet</a>
-
-        <div data-role="popup" id="dlg-sign-up-sent" data-dismissible="false" style="max-width:400px;">
-
-            <div data-role="header">
-
-                <h1>Almost done...</h1>
-
-            </div>
-
-            <div role="main" class="ui-content">
-
-                <h3>Confirm Your Email Address</h3>
-
-                <p>We sent you an email with instructions on how to confirm your email address. Please check your inbox and follow the instructions in the email.</p>
-
-                <div class="mc-text-center"><a href="sign-in.html" class="ui-btn ui-corner-all ui-shadow ui-btn-b mc-top-margin-1-5">OK</a></div>
-
-            </div>
-
-        </div>
-
-    </div><!-- /content -->
-
-</div><!-- /page -->
 
 
 
