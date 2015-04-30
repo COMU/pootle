@@ -12,29 +12,120 @@
 		<link type='text/css' href='style/brick-1.0.1.css' rel="stylesheet">
 		<link type='text/css' href='style/style.css' rel="stylesheet">
 		<link type='text/css' href='style/octicons.css' rel="stylesheet"> 
+<link rel="resource" type="application/l10n" href="locales/locales.ini" />
+    <script type="application/javascript" src="js/l10n.js"></script>
+    <base target="_blank">
 	</head>
+	<style>
+  #gameArea {
+    display: none;
+  }
+  #field {
+    border-collapse: collapse;
+    border: 1px solid black;
+    margin: 20px auto;
+    
+  }
+  #field td{
+    border: 1px solid black;
+    min-width: 20px;
+    min-height: 20px;
+    text-align: center;
+    empty-cells: show;
+  }
+  #field td.closed{
+    background-color: darkgray;
+  }
+  #field td.flagged{
+    background-color: red;
+  }
+  #field td.mine{
+    background: url("mine_small.jpg") red no-repeat center;
+  }
+  #status {
+    width: 75%;
+    border: 1px solid gray;
+    margin: 10px auto;
+    text-align: center;
+  }
+</style>
 	<body>	
 		<x-deck>
 			<x-card id='search_card' selected transition="show">
 				<x-layout id='search_layout'>
 					<header class='top-menu colorBlue'>
 						<button disabled></button>
+						<h1>POOTLE</h1>
 						
-						<h1>POOTLE LOGIN</h1>
 					</header>
 					<section id='search_section'>
 						<div id='inputs'>
+							
 							<input name='username' placeholder=' Username'class='input form-control'>
 							<input name='password' placeholder=' Password'class='input form-control'input type='password'>
                                                         <button id='submit' class='btn-success input buttonBlue'>LOGIN</button>
+							<p id="checkbox"><input type='checkbox'id="remember" class='check' name='remember' value= "remember" >Remember me</p>
+							
 						</div>
-                                                <div id="results"></div>
+                                                <div id="results" > </div>
+						                                    <div id="filepage"></div>
+						                                    <div id="tablepage"></div>
+						                                    <table id="field"></table>
+<div id="start">
+		<button id='kaydol' data-l10n-id="kaydol" class='btn-success input buttonBlue'>REGISTER</button>
+	  <button id='giris' data-l10n-id="giris"class='btn-success input buttonBlue'>LOGIN</button>
+</div>		
+<div id="registerresult">		
+</div> 
+<div id="kayit">
+	<button id='logp' data-l10n-id="back" class='btn-success im buttonBlue'>BACK</button>
+	
+      <p id="issim" data-l10n-id='isim'>Name:</p>
+      <input name='isim' class='ip form-control' >
+	    <p id="suucu" data-l10n-id='sunucu'>Server Name:</p>
+      <input name='sunucu' placeholder='example.com' class='ip form-control' >
+	    <p id="ukyt" data-l10n-id='namekayit'>Username:</p>
+      <input name='namekayit' class='ip form-control' >
+      <p id="pkyt" data-l10n-id='passwordkayit'>Password:</p>
+      <input name='passwordkayit' class='ip form-control' input type='password' >
+						
+	<button id='rkayit' data-l10n-id='rkayit'class='btn-success input buttonBlue'>SAVE</button>					
+</div>
+<div id="cevir">	
+<tr><td><button id='tableback' data-l10n-id="back" class='btn-success im buttonBlue'>BACK</button></td><td><button id='logout' data-l10n-id="logout" class='btn-success im buttonBlue'>LOGOUT</button></td></tr>	
+<p id="kelime" ></p>
+<textarea id="cevrilen" style="width:95%" rows="6"></textarea>
+<p id="koneri" ></p>
+ <p id="oneri1" ></p>
+ <p id="oneri2" ></p>
+ <p id="oneri3" ></p>
+ <p id="oneri4" ></p>
+ <p id="oneri5" ></p>
+		  <table>
+<tr>
+<td>
+	<button id='gonder' data-l10n-id="gonder"class='btn-success is buttonBlue' >SEND</button>
+</td>
+<td>
+<button id='oner'data-l10n-id="oner" class='btn-success is buttonBlue' >RECOMMENDATIONS</button> 
+</td>
+</tr>
+<tr>
+<td>
+<button id='onceki' data-l10n-id="onceki"class='btn-success is buttonBlue' >PREVIOUS</button> 
+</td>
+<td>
+<button id='sonraki'data-l10n-id="sonraki" class='btn-success is buttonBlue'>NEXT</button>
+</td>
+</tr>
+</table>
+		</div>
 					</section>
 					
 				</x-layout>
 			</x-card>
 
-
+<div id="project"></div>
   
 
      
@@ -106,8 +197,6 @@
 						<h1>About</h1>
 					</header>
 					<section id='about_page' data-type='list'>
-						<p>GitRSS allows you to keep an eye on github commits, in this version notifications <strong>aren't</strong> implemented.
-						We'll add notifications and others features with the upcoming releases.</p>
 						<header class="listheaderBlue borderBlue">Version</header>
 						<p>1.0.1</p>
 						<header class="listheaderBlue borderBlue">Developers</header>
@@ -134,5 +223,7 @@
 			</x-card>
 			
 		</x-deck>
+
+<div id="placeholder"></div>
 	</body>
 </html>

@@ -1,0 +1,10 @@
+Pootle Firefox-OS mobile app
+This application will be install =>
+Firstly .zip file's download and unzip
+1-"sudo adb kill-server" is written to the console
+2-"sudo adb start-server" is written to the console
+3-Click the Mozilla Firefox browser
+4-Click the tools
+5-Click the web developer
+6-Click the WebIDE
+7-

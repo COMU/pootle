@@ -12,49 +12,115 @@
 		<link type='text/css' href='style/brick-1.0.1.css' rel="stylesheet">
 		<link type='text/css' href='style/style.css' rel="stylesheet">
 		<link type='text/css' href='style/octicons.css' rel="stylesheet"> 
+<link rel="resource" type="application/l10n" href="locales/locales.ini" />
+    <script type="application/javascript" src="js/l10n.js"></script>
+    <base target="_blank">
 	</head>
+	<style>
+  #gameArea {
+    display: none;
+  }
+  #field {
+    border-collapse: collapse;
+    border: 1px solid black;
+    margin: 20px auto;
+    
+  }
+  #field td{
+    border: 1px solid black;
+    min-width: 20px;
+    min-height: 20px;
+    text-align: center;
+    empty-cells: show;
+  }
+  #field td.closed{
+    background-color: darkgray;
+  }
+  #field td.flagged{
+    background-color: red;
+  }
+  #field td.mine{
+    background: url("mine_small.jpg") red no-repeat center;
+  }
+  #status {
+    width: 75%;
+    border: 1px solid gray;
+    margin: 10px auto;
+    text-align: center;
+  }
+</style>
 	<body>	
 		<x-deck>
 			<x-card id='search_card' selected transition="show">
 				<x-layout id='search_layout'>
 					<header class='top-menu colorBlue'>
 						<button disabled></button>
+						<h1>POOTLE</h1>
 						
-						<h1>POOTLE LOGIN</h1>
 					</header>
 					<section id='search_section'>
 						<div id='inputs'>
+							
 							<input name='username' placeholder=' Username'class='input form-control'>
 							<input name='password' placeholder=' Password'class='input form-control'input type='password'>
                                                         <button id='submit' class='btn-success input buttonBlue'>LOGIN</button>
+							<p id="checkbox"><input type='checkbox'id="remember" class='check' name='remember' value= "remember" >Remember me</p>
+							
 						</div>
-                                                <div id="results"></div>
+                                                <div id="results" > </div>
+						                                    <div id="filepage"></div>
+						                                    <div id="tablepage"></div>
+						                                    <table id="field"></table>
+<div id="start">
+		<button id='kaydol' data-l10n-id="kaydol" class='btn-success input buttonBlue'>REGISTER</button>
+	  <button id='giris' class='btn-success input buttonBlue'>OTURUM AÇ</button>
+</div>		
+<div id="registerresult">		
+</div>
+<div id="kayit">
+	<button id='logp' class='btn-success buttonBlue'>BACK</button>				
+	<input name='isim' placeholder='İsim'class='input form-control'>
+  <input name='sunucu' placeholder='Sunucu Adı'class='input form-control'>
+	<input name='namekayit' placeholder='Username'class='input form-control'>
+	<input name='passwordkayit' placeholder='Password'class='input form-control'input type='password'>					
+	<button id='rkayit' class='btn-success input buttonBlue'>KAYDET</button>					
+</div>
+<div id="cevir">	
+<tr><td><button id='tableback' class='btn-success buttonBlue'>BACK</button></td><td><button id='logout' class='btn-success buttonBlue'>LOGOUT</button></td></tr>	
+<p id="kelime" ></p>
+<textarea id="cevrilen" style="width:95%" rows="6"></textarea>
+<p id="koneri" ></p>
+ <p id="oneri1" ></p>
+ <p id="oneri2" ></p>
+ <p id="oneri3" ></p>
+ <p id="oneri4" ></p>
+ <p id="oneri5" ></p>
+		  <table>
+<tr>
+<td>
+	<button id='gonder' class='btn-success input buttonBlue' >GÖNDER</button>
+</td>
+<td>
+<button id='oner' class='btn-success input buttonBlue' >ÖNER</button> 
+</td>
+</tr>
+<tr>
+<td>
+<button id='onceki' class='btn-success input buttonBlue' >ÖNCEKİ</button> 
+</td>
+<td>
+<button id='sonraki' class='btn-success input buttonBlue' >SONRAKİ</button>
+</td>
+</tr>
+</table>
+		</div>
 					</section>
 					
 				</x-layout>
 			</x-card>
 
-
-
-<div data-role="page" id="second">
-        <div data-theme="a" data-role="header">
-            <h3>
-                Second Page
-            </h3>
-            <a href="#index" class="ui-btn-left">Back</a>
-        </div>
-
-        <div data-role="content">
-            <h2>Simple list</h2>
-            <ul data-role="listview" data-inset="true" id="movie-data" data-theme="a">
-
-            </ul>
-        </div>
-
-        <div data-theme="a" data-role="footer" data-position="fixed">
-
-        </div>
-    </div>   
+<div id="project"></div>
+  
 
      
   				
@@ -153,5 +219,7 @@
 			</x-card>
 			
 		</x-deck>
+
+<div id="placeholder"></div>
 	</body>
 </html>
