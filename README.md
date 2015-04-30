@@ -1,4 +1,4 @@
-pootle
+Pootle
 ======
 
 Pootle Mobil Uygulama
