@@ -1,5 +1,19 @@
 {
     "welcome" : "hoşgeldiniz",
     "dontaccount": "Hesabınız mı yok?",
-    "newrecord": "Yeni Kayıt"
+    "newrecord": "Yeni Kayıt",
+    "loginpootle": "Pootle Giriş",
+    "remember": "Hatırla",
+    "languages": "Diller",
+    "projects": "Projeler",
+    "files": "Dosyalar",
+    "filename": "Dosya Adı",
+    "about": "Hakkında",
+    "avarage": "İlerleme",
+    "total": "Toplam",
+    "needtranlate": "Çevirilmemiş",
+    "fuzzy": "Çalışma Gerekli",
+    "send": "Gönder",
+    "": "",
+    "": ""
 }

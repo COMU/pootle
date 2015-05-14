@@ -19,13 +19,13 @@
 -->
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="format-detection" content="telephone=no" />
+    <meta charset="utf-8"/>
+    <meta name="format-detection" content="telephone=no"/>
     <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
     <meta content="width=device-width, initial-scale=1" name="viewport">
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
-    <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.4.min.css" />
-    <meta name="msapplication-tap-highlight" content="no" />
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.4.min.css"/>
+    <meta name="msapplication-tap-highlight" content="no"/>
 
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
@@ -33,58 +33,35 @@
     <script type="text/javascript" src="js/index.js"></script>
     <script src="js/lang.js"></script>
     <script type="text/javascript">
-        app.initialize();
+        //app.initialize();
 
-        function pageLoaded()
-        {
-            var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
-            db.transaction(queryDB,errorCB);
-        }
 
-        function errorCB(err) {
-            alert("Error processing SQL: "+err.code);
-        }
-
-        //select all from SoccerPlayer
-        function queryDB(tx){
-            tx.executeSql('SELECT * FROM USER',[],querySuccess,errorCB);
-        }
-
-        function querySuccess(tx,result){
-            $('#divList').empty();
-
-            for(var i = 0; i < result.rows.length; i++)
-            {
-                var row = result.rows.item(i);
-                $('#divList').append('<li><a href="#">User Name <h3 class="ui-li-heading">'+row['username']+'</h3><p class="ui-li-desc">Nick '+row['nickName']+'</p></a></li>');
-            }
-
-            $('#divList').listview();
-        }
 
     </script>
 </head>
+
 <body onload="pageLoaded()">
+
 
 <div data-role="page" data-theme="b" id="welcomepage">
 
     <div data-role="header" data-theme="b">
         <h1>Pootle</h1>
-    </div><!-- /header -->
+    </div>
+
 
     <div role="main" class="ui-content" data-theme="b" id="loginnPage">
 
-        <h2  class="mc-text-center" translate></h2>
+        <h2 class="mc-text-center" translate></h2>
 
 
-        <p tkey="dontaccount"class="mc-top-margin-1-5"><b></b></p>
+        <p tkey="dontaccount" class="mc-top-margin-1-5"><b></b></p>
 
         <div id="divList">
 
         </div>
 
         <a id="newrecord" tkey="newrecord" href="Record.html" class="ui-btn ui-btn-b ui-corner-all"></a>
-
 
 
         <p></p>
@@ -94,33 +71,64 @@
 </div>
 
 
-
-
-
 <div data-role="page" data-theme="b" id="loginPage">
     <div data-role="header" data-theme="b">
-        <h1> Pootle Giriş </h1>
+        <h1 tkey="loginpootle"></h1>
     </div>
 
     <div data-role="content" data-theme="b" id="Login_Content">
-        <input type="text" id="username" placeholder="Kullanıcı Adı" >
-        <input type="password" id="password" placeholder="Parola :)" >
+        <input type="text" id="username" placeholder="Kullanıcı Adı">
+        <input type="password" id="password" placeholder="Parola :)">
         <input type="checkbox" value="true" id="remember">
-        <label for="remember">Hatirla</label>
-        <button type="button" value="Button" onclick="startApp()"> Login </button>
+        <label for="remember" tkey="remember"></label>
+        <button type="button" value="Button" onclick="startApp()"> Login</button>
     </div>
 </div>
 
+
 <div data-role="page" data-theme="b" id="languagesPage">
+
+
     <div data-role="header" data-position="fixed">
-        <h1> Diller </h1>
+
+        <div id="aboutButton">
+                
+            <button tkey="about" data-icon="bullets" class="ui-btn-right"></button>
+
+        </div>
+
+
+        <h1 tkey="languages"></h1>
     </div>
     <ul id="Languages_Content" data-role="listview" data-theme="b"></ul>
 </div>
 
+<div data-role="page" data-theme="b" id="about">
+    <div data-role="header" data-add-back-btn="true" data-back-btn-text="Geri" data-position="fixed">
+        <h1 tkey="about"></h1>
+
+        <p>Esra ALTINTAŞ</p>
+
+        <p><a href="mailto:es.altintas@gmail.com" target="_top">es.altintas@gmail.com</a></p>
+
+        <header >Version</header>
+        <p>1.0.1</p>
+
+        <p><a data-role="button" data-theme="a" data-transition="fade" href="http://www.fsf.org" data-prefetch>GPL</a></p>
+
+    </div>
+
+</div>
+
+
 <div data-role="page" data-theme="b" id="projectsPage">
     <div data-role="header" data-add-back-btn="true" data-back-btn-text="Geri" data-position="fixed">
-        <h1> Projeler </h1>
+        <div id="aboutButton2">
+                
+            <button tkey="about" data-icon="bullets" class="ui-btn-right"></button>
+
+        </div>
+        <h1 tkey="projects"></h1>
     </div>
     <ul id="Projects_Content" data-role="listview" data-theme="b" data-inset="true"></ul>
 
@@ -128,13 +136,18 @@
 
 <div data-role="page" data-theme="b" id="filesPage">
     <div data-role="header" data-add-back-btn="true" data-back-btn-text="Geri" data-position="fixed">
-        <h1> Dosyalar </h1>
+        <div id="aboutButton3">
+                
+            <button tkey="about" data-icon="bullets" class="ui-btn-right"></button>
+
+        </div>
+        <h1 tkey="files"></h1>
     </div>
     <table id="fileTable" data-role="table" data-mode="column">
         <thead>
         <tr>
-            <th>Dosya Adı</th>
-            <th>Ilerleme</th>
+            <th tkey="filename"></th>
+            <th tkey="avarage">Ilerleme</th>
         </tr>
         </thead>
         <tbody id="Files_Content"></tbody>
@@ -142,40 +155,51 @@
 </div>
 
 <div data-role="page" data-theme="b" id="aboutFilePage">
-    <div  data-role="header" data-add-back-btn="true" data-back-btn-text="Geri" data-position="fixed">
+    <div data-role="header" data-add-back-btn="true" data-back-btn-text="Geri" data-position="fixed">
+        <div id="aboutButton4">
+                
+            <button tkey="about" data-icon="bullets" class="ui-btn-right"></button>
+
+        </div>
         <h1 id="FileName"></h1>
     </div>
     <table id="AboutFileTable" data-role="table" data-mode="column">
         <thead>
         <tr>
-            <th>Toplam</th>
-            <th>Cevirilmemiş</th>
-            <th>Çalışma Gerekli</th>
+            <th tkey="total"></th>
+            <th tkey="needtranslate"></th>
+            <th tkey="fuzzy"></th>
         </tr>
         </thead>
         <tbody id="AboutFiles_Content"></tbody>
     </table>
 </div>
 
-<<div data-role="page" data-theme="b" id="TranslatePage">
-    <div  data-role="header" data-add-back-btn="true" data-back-btn-text="Geri" data-position="fixed">
-        <h1 id="file_name"> </h1>
+<
+<div data-role="page" data-theme="b" id="TranslatePage">
+    <div data-role="header" data-add-back-btn="true" data-back-btn-text="Geri" data-position="fixed">
+        <div id="aboutButton5">
+                
+            <button tkey="about" data-icon="bullets" class="ui-btn-right"></button>
+
+        </div>
+        <h1 id="file_name"></h1>
     </div>
-    <div id="TranslateEnglish" >
+    <div id="TranslateEnglish">
 
     </div>
 
-    <div id="TranslateTurkish" >
+    <div id="TranslateTurkish">
 
 
     </div>
     <table>
         <tr>
             <td>
-                <button id="gonder" type="submit" value="Gonder" > Gönder </button>
+                <button id="gonder" type="submit" value="Gonder" tkey="send"> Gönder</button>
             </td>
             <td>
-                <button id="oner" type="button" value="Oner" > Öner </button>
+                <button id="oner" type="button" value="Oner"> Öner</button>
             </td>
         </tr>
         <tr>
@@ -183,18 +207,20 @@
                 <button id="onceki" type="button" value="Onceki">Önceki</button>
             </td>
             <td>
-                <button id="sonraki" type="button" value="Sonraki" > Sonraki </button>
+                <button id="sonraki" type="button" value="Sonraki"> Sonraki</button>
             </td>
         </tr>
     </table>
 
     <div data-role="collapsible" data-mini="true">
-            <h4>Öneriler</h4>
-            <ul data-role="listview">
-                <li><a href="#">List item 1</a></li>
-                <li><a href="#">List item 2</a></li>
-                <li><a href="#">List item 3</a></li>
-            </ul>
+        <h4  id="oneri" >Öneriler
+            
+        <ul data-role="listview">
+                    
+
+        </ul>
+
+        </h4>
     </div>
 
 </div>
