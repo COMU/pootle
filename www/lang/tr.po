@@ -7,73 +7,73 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 msgid "welcome"
-msgstr "welcome"
+msgstr "hoşgeldiniz"
 
 msgid "dontaccount"
-msgstr "You don't have an account?"
+msgstr "Hesabınız mı yok?"
 
 msgid "newrecord"
-msgstr "New Record"
-
-msgid "about"
-msgstr "About"
+msgstr "Yeni Kayıt"
 
 msgid "loginpootle"
-msgstr "Pootle Login"
+msgstr "Pootle Giriş"
 
 msgid "remember"
-msgstr "Remember"
+msgstr "Hatırla"
 
 msgid "languages"
-msgstr "Languages"
+msgstr "Diller"
 
 msgid "projects"
-msgstr "Projects"
+msgstr "Projeler"
 
 msgid "files"
-msgstr "Files"
+msgstr "Dosyalar"
 
 msgid "filename"
-msgstr "File Name"
+msgstr "Dosya Adı"
+
+msgid "about"
+msgstr "Hakkında"
 
 msgid "percent"
-msgstr "Percent"
+msgstr "İlerleme"
 
 msgid "total"
-msgstr "Total"
+msgstr "Toplam"
 
 msgid "needtranlate"
-msgstr "Need Translate"
+msgstr "Çevirilmemiş"
 
 msgid "fuzzy"
-msgstr "Fuzzy"
+msgstr "Çalışma Gerekli"
 
 msgid "send"
-msgstr "Send"
+msgstr "Gönder"
 
 msgid "suggest"
-msgstr "Suggest"
+msgstr "Öner"
 
 msgid "previous"
-msgstr "Previous"
+msgstr "Önceki"
 
 msgid "next"
-msgstr "Next"
+msgstr "Sonraki"
 
 msgid "nickName"
-msgstr "Nickname"
+msgstr "Takma Ad"
 
 msgid "serverAddress"
-msgstr "Server Address"
+msgstr "Sunucu Adresi"
 
 msgid "userName"
-msgstr "User Name"
+msgstr "Kullanıcı Adı"
 
 msgid "password"
-msgstr "Password"
+msgstr "Parola"
 
 msgid "save"
-msgstr "Save"
+msgstr "Kaydet"
 
 msgid "cancel"
-msgstr "Cancel"
+msgstr "İptal"

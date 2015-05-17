@@ -9,11 +9,18 @@
     "files": "Dosyalar",
     "filename": "Dosya Adı",
     "about": "Hakkında",
-    "avarage": "İlerleme",
+    "percent": "İlerleme",
     "total": "Toplam",
     "needtranlate": "Çevirilmemiş",
     "fuzzy": "Çalışma Gerekli",
     "send": "Gönder",
-    "": "",
-    "": ""
+    "suggest": "Öner",
+    "previous": "Önceki",
+    "next": "Sonraki",
+    "nickName": "Takma Ad",
+    "serverAddress": "Sunucu Adresi",
+    "userName": "Kullanıcı Adı",
+    "password": "Parola",
+    "save": "Kaydet",
+    "cancel": "İptal"
 }

@@ -19,14 +19,14 @@
 
 
         function createTransaction() {
-            var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
+            var db = window.openDatabase("Database", "1.0", "Cordova Demo",  1000000);
             db.transaction(populateDB, errorCB, successCB);
         }
 
         // Populate the database
         //
         function populateDB(tx) {
-            //tx.executeSql('DROP TABLE USER');
+            tx.executeSql('DROP TABLE USER');
             tx.executeSql('CREATE TABLE IF NOT EXISTS USER (id auto increment, username, password, serverAddress, nickName)');
 
             var userName = document.getElementById('txt-user-name').value;

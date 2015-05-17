@@ -55,7 +55,7 @@ function pageLoaded() {
 }
 
 function errorCB(err) {
-    alert("Error processing SQL: " + err.code);
+    alert("Error processing SQL: " + err);
 }
 
 //select all from SoccerPlayer
@@ -105,8 +105,8 @@ var projects = [];
 function startApp() {
     if ($('#remember').is(':checked')) {
         // save username and password
-        //window.localStorage.setItem("username", $('#username').val());
-        //window.localStorage.setItem("password", $('#password').val());
+        window.localStorage.setItem("username", $('#username').val());
+        window.localStorage.setItem("password", $('#password').val());
     }
 
     $('#aboutButton').on("tap", function () {
@@ -288,7 +288,7 @@ function startApp() {
 
             suggest = units[i].suggestions;
 
-            getSelectedStateData(selectedlanguageIndex, selectedProjectIndex, selectedStoreIndex, selectedUnitIndex, selectedSugIndex, function () {
+            getSelectedUnitData(selectedlanguageIndex, selectedProjectIndex, selectedStoreIndex, selectedUnitIndex, selectedSugIndex, function () {
                 console.log(projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units[selectedUnitIndex].suggestions[selectedSugIndex]);
             });
 
@@ -301,16 +301,9 @@ function startApp() {
 
         function sonraki() {
             i = i + 1;
-            /* getSelectedUnitData(selectedlanguageIndex, selectedProjectIndex, selectedStoreIndex, i, function() {
-             var unit = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units[i];
-             markup = '<textarea class="TranslateTurkish" > ' + unit.target_f + ' </textarea>';
-             markup2 = '<p class="TranslateEnglish">' + unit.source_f + '</p>';
 
-             $('#TranslateTurkish').html(markup);
-             $('#TranslateEnglish').html(markup2);
-             });*/
 
-            getSelectedStateData(selectedlanguageIndex, selectedProjectIndex, selectedStoreIndex, i, function () {
+            getSelectedUnitData(selectedlanguageIndex, selectedProjectIndex, selectedStoreIndex, i, function () {
                 var unit = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units[i];
                 console.log(arr)
                 markup = '<textarea class="TranslateTurkish" > ' + unit.target_f + ' </textarea>';
@@ -557,41 +550,6 @@ function startApp() {
 
 }
 
-function getSelectedSuggestData(languageindex, projectindex, storeindex, unitindex, suggestindex, callback) {
-    var suggestUrl = projects[languageindex]['translation_projects'][projectindex]['stores'][storeindex]['units'][unitindex]['suggestindex'][suggestindex];
-
-
-    console.log(suggestUrl);
-    request(apiRoot + suggestUrl, function (data) {
-        suggest = data;
-        console.log(suggest);
-
-
-        if (suggest.length != 0) {
-
-            for (var l = 0; l < suggest.length; l++) {
-
-                suggest = suggest[l];
-
-
-                projects[languageindex]['translation_projects'][projectindex]['stores'][storeindex]['units'][unitindex]['suggestindex'][suggestindex] = data;
-                console.log(projects[languageindex]['translation_projects'][projectindex]['stores'][storeindex]['units'][unitindex]['suggestindex'][suggestindex]);
-                console.log("es")
-
-
-                //var suggest = '< li ' + units[i].suggestions + '</li>';
-            }
-
-        }
-        callback();
-
-        // console.log(state)
-
-
-        projects[languageindex]['translation_projects'][projectindex]['stores'][storeindex]['units'][unitindex]['suggestindex'][suggestindex] = data;
-
-    });
-}
 
 
 function getSelectedStateData(languageindex, projectindex, storeindex, unitindex, callback) {
@@ -719,7 +677,7 @@ function request(url, successCallback, errorCallback) {
     $.ajax({
         type: "GET",
         url: url,
-        dataType: 'json',
+        dataType: 'jsonp',
         async: false,
         data: '{}',
         beforeSend: function (xhr) {
