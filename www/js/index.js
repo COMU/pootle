@@ -50,32 +50,20 @@ var app = {
 };
 
 function pageLoaded() {
-    var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
-    db.transaction(queryDB, errorCB);
-}
-
-function errorCB(err) {
-    alert("Error processing SQL: " + err);
-}
-
-//select all from SoccerPlayer
-function queryDB(tx) {
-    tx.executeSql('SELECT * FROM USER', [], querySuccess, errorCB);
-}
-
-var apix;
-
-function querySuccess(tx, result) {
     $('#divList').empty();
 
-    for (var i = 0; i < result.rows.length; i++) {
-        var row = result.rows.item(i);
-        $('#divList').append('<a id=' + row['nickName'] + '><h3 class="ui-li-heading">' + row['nickName'] + '</h3></a>');
+    var users = JSON.parse(localStorage.getItem('users'));
+
+    for (var i = 0; i < users.length; i++) {
+        var row = users[i];
+        $('#divList').append('<a id=' + row['nick'] + '><h3 class="ui-li-heading">' + row['nick'] + '</h3></a>');
         console.log(divList);
-        console.log(row['serverAddress'])
+        //console.log(row['serverAddress'])
         //apix ='http://api.ozdincer.com'
-        $('#' + row['nickName']).on("tap", function () {
+        $('#' + row['nick']).on("tap", function () {
             apix = row['serverAddress'];
+            userName = row['userName'];
+            passWord = row['password'];
             $.mobile.changePage("#loginPage");
         });
     }
@@ -84,25 +72,39 @@ function querySuccess(tx, result) {
 }
 
 
+
+var apix;
+
+
+
+
 var i = 0;
 var j = 0;
 var k = 0;
 arr = [];
-
+var apiRoot = '';
+//var apiRoot = apix;
+console.log(apix)
 
 $(document).on("pagebeforeshow", "#loginPage", function () {
+    apiRoot = 'http://' + apix;
+    console.log(apiRoot);
+    console.log(userName);
+    console.log(passWord);
     if (window.localStorage.getItem("username") && window.localStorage.getItem("password")) {
         startApp();
     }
 });
 
-var username = window.localStorage.getItem("username") || document.getElementById("username").value;
-var password = window.localStorage.getItem("password") || document.getElementById("password").value;
+var username = window.localStorage.getItem("username") || userName;
+var password = window.localStorage.getItem("password") || passWord;
 
+//console.log(apix);
 
-var apiRoot = 'http://api.ozdincer.com';
 var projects = [];
 function startApp() {
+    //apiRoot = apix;
+    //console.log(apix)
     if ($('#remember').is(':checked')) {
         // save username and password
         window.localStorage.setItem("username", $('#username').val());
@@ -677,7 +679,7 @@ function request(url, successCallback, errorCallback) {
     $.ajax({
         type: "GET",
         url: url,
-        dataType: 'jsonp',
+        dataType: 'json',
         async: false,
         data: '{}',
         beforeSend: function (xhr) {
