@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">Pootle</string>
+
+    <string name="title_section1">Anasayfa</string>
+    <string name="title_section2">Oturum Değiştir</string>
+    <string name="title_section3">Sunucu İşlemleri</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="start">Pootle</string>
+    <string name="username">Kullanıcı Adı:</string>
+    <string name="passwd">Şifre:</string>
+    <string name="login">GİRİŞ</string>
+    <string name="server">Sunucu:</string>
+    <string name="remember">Beni Hatırla</string>
+    <string name="forgot">Şifremi Unuttum</string>
+    <string name="listlanguages">Diller</string>
+    <string name="listprojects">Projeler</string>
+    <string name="translate">Çalışma gerekli</string>
+    <string name="send">ÇEVİR</string>
+    <string name="suggestion">>>Öner</string>
+    <string name="translater">ÇEVİR</string>
+    <string name="choose">Seçiniz</string>
+    <string name="files">Dosya Adı</string>
+    <string name="total">Toplam</string>
+    <string name="needtranslate">Çeviri Gerekli</string>
+    <string name="action_settings">Ayarlar</string>
+    <string name="addserver">Sunucu Ekle</string>
+    <string name="subserver">Sunucu Sil</string>
+    <string name="servername">Sunucu adı :</string>
+    <string name="servernickname">Takma adı :</string>
+    <string name="add">EKLE</string>
+    <string name="remove">SİL</string>
+    <string name="servers">Sunucular ve Takma Adları </string>
+    <string name="title_activity_projects_acitivty">ProjectsAcitivty</string>
+    <string name="languageproject"> DİL VE PROJE SEÇİNİZ </string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_files">FilesActivity</string>
+    <string name="title_activity_translate">TranslateActivity</string>
+    <string name="title_activity_project">ProjectActivity</string>
+
+    <string name="action_example">Example action</string>
+    <string name="show">Listele</string>
+    <string name="RegisterServer">Kayıtlı Sunucular</string>
+    <string name="removeserver">Sunucu Sil</string>
+    <string name="title_section4">Hakkında</string>
+</resources>

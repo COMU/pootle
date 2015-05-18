@@ -1,0 +1,148 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.bsrakdag.pootle.TranslateActivity"
+    android:background="@drawable/backk">
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true">
+
+        <FrameLayout
+            android:layout_width="349dp"
+            android:layout_height="206dp"
+            android:layout_gravity="center_horizontal|top"
+            >
+
+            <EditText
+                android:layout_width="275dp"
+                android:layout_height="81dp"
+                android:id="@+id/cevrilecek"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:textSize="15dp" />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="32dp"
+                android:layout_height="wrap_content"
+                android:text="&lt;&lt;"
+                android:id="@+id/gerigit"
+                android:onClick="Gerigit"
+                android:layout_gravity="left|center_vertical"
+                android:background="@color/switch_thumb_normal_material_light" />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="32dp"
+                android:layout_height="wrap_content"
+                android:text=">>"
+                android:id="@+id/ilerigit"
+                android:onClick="Ilerigit"
+                android:layout_gravity="right|center_vertical"
+                android:background="@color/switch_thumb_normal_material_light" />
+
+            <ImageView
+                android:layout_width="57dp"
+                android:layout_height="57dp"
+                android:id="@+id/imageView5"
+                android:layout_gravity="center_horizontal|top"
+                android:src="@drawable/translate_a" />
+
+            <FrameLayout
+                android:layout_width="154dp"
+                android:layout_height="64dp"
+                android:layout_gravity="left|top">
+
+                <TextView
+                    android:layout_width="85dp"
+                    android:layout_height="26dp"
+                    android:id="@+id/textView12"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:text="Engilish" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="154dp"
+                android:layout_height="64dp"
+                android:layout_gravity="left|bottom">
+
+                <TextView
+                    android:layout_width="79dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/cevrilen_dil"
+                    android:layout_gravity="center_horizontal|bottom" />
+            </FrameLayout>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="134dp"
+            android:layout_gravity="right|center_vertical">
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText2"
+                android:layout_gravity="center_horizontal|top" />
+
+            <FrameLayout
+                android:layout_width="235dp"
+                android:layout_height="102dp"
+                android:layout_gravity="center_horizontal|bottom">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/send"
+                    android:onClick="cevir"
+                    android:id="@+id/send" android:layout_weight="0.36"
+                    android:layout_gravity="left|bottom"
+                    android:background="@color/switch_thumb_normal_material_light" />
+
+                <CheckBox
+                    android:layout_width="140dp"
+                    android:layout_height="59dp"
+                    android:text="@string/translate"
+                    android:id="@+id/checkBox_need"
+                    android:checked="false"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:layout_gravity="right|bottom"
+                    android:textSize="15dp" />
+
+            </FrameLayout>
+
+            <EditText
+                android:layout_width="275dp"
+                android:layout_height="81dp"
+                android:id="@+id/cevrilmis"
+                android:layout_gravity="center_horizontal|top"
+                android:background="@android:color/white"
+                android:textSize="15dp" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="159dp"
+            android:layout_gravity="center_horizontal|bottom"
+            >
+
+            <ListView
+                android:layout_width="268dp"
+                android:layout_height="match_parent"
+                android:id="@+id/oneri"
+                android:layout_gravity="center_horizontal|top"
+                android:headerDividersEnabled="false"
+                android:background="@android:color/transparent" />
+        </FrameLayout>
+
+    </FrameLayout>
+
+</RelativeLayout>
