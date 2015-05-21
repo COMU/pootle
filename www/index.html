@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.4.min.css"/>
+    <meta name="msapplication-tap-highlight" content="no"/>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.4.4.min.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script src="js/lang.js"></script>
+    <script src="CryptoJS%20v3.1.2/rollups/md5.js"></script>
+    <script type="text/javascript">
+        //app.initialize();
+
+       /* function createTransaction() {
+            var db = window.openDatabase("Database", "1.0", "Cordova Demo",  1000000);
+            db.transaction(populateDB, errorCB, successCB);
+        }*/
+
+        // Populate the database
+       // var db = window.openDatabase("Database", "1.0", "Cordova Demo",  1000000);
+        //db.transaction(populateDB, errorCB, successCB);
+        //
+        function addUser() {
+           // tx.executeSql('DROP TABLE USER');
+            /*localStorage.setItem("users", JSON.stringify([user1, user2]))
+
+             var users = JSON.parse(localStorage.getItem("users")) (edited)
+
+             users.push({ username: input.value }) (edited)
+
+             localStorage.setItem("users", JSON.stringify(users))
+
+
+             localStorage.setItem("users", JSON.stringify([]))
+
+
+             */
+//            localStorage.setItem("users", JSON.stringify([]));
+
+
+            var user = {
+                userName: document.getElementById('txt-user-name').value,
+                password: CryptoJS.MD5(document.getElementById('txt-password').value),
+                serverAddress: document.getElementById('txt-server-address').value,
+                nick: document.getElementById('txt-nick-name').value
+            };
+
+
+            var users = JSON.parse(localStorage.getItem('users') || '[]');
+
+            users.push(user);
+
+            localStorage.setItem('users', JSON.stringify(users));
+
+//            localStorage.removeItem("users")
+
+            alert("success!");
+
+            window.location.assign("index.html");
+
+
+
+        }
+
+
+
+
+    </script>
+</head>
+
+<body onload="pageLoaded()">
+
+
+
+
+<div data-role="page" data-theme="b" id="welcomepage">
+
+    <div data-role="header" data-theme="b">
+        <h1>Pootle</h1>
+    </div>
+
+
+    <div role="main" class="ui-content" data-theme="b" id="loginnPage">
+
+        <h2 class="mc-text-center" translate></h2>
+
+
+
+
+        <div id="divList">
+
+        </div>
+
+        </br>
+
+        <p tkey="dontaccount" class="mc-top-margin-1-5"></p>
+
+        <a id="newrecord" tkey="newrecord" href="#recordpage" class="ui-btn ui-btn-b ui-corner-all"></a>
+
+
+        <p></p>
+
+    </div>
+
+</div>
+
+<div data-role="page" data-theme="b" id="recordpage">
+
+    <div data-role="header" data-theme="b">
+
+        <h1>Pootle</h1>
+
+    </div><!-- /header -->
+
+    <div role="main" class="ui-content">
+
+        <h3 tkey="newrecord"></h3>
+
+        <label for="txt-nick-name" tkey="nickName"></label>
+
+        <input type="text" name="txt-nick-name" id="txt-nick-name" value="">
+
+        <label for="txt-server-address" tkey="serverAddress"></label>
+
+        <input type="text" name="txt-server-address" id="txt-server-address" value="">
+
+        <label for="txt-user-name" tkey="userName"></label>
+
+        <input type="text" name="txt-user-name" id="txt-user-name" value="">
+
+        <label for="txt-password" tkey="password"></label>
+
+        <input type="password" name="txt-password" id="txt-password" value="">
+
+
+        <a href="#recordpage" data-rel="pop" onclick="addUser();" data-transition="pop" data-position-to="window" id="btn-submit" class="ui-btn ui-btn-b ui-corner-all" tkey="save"></a>
+
+        <a href="index.html" data-rel="pop" onclick="addUser();" data-transition="pop" data-position-to="window" id="btn-cancel" class="ui-btn ui-btn-b ui-corner-all" tkey="cancel"></a>
+
+
+    </div><!-- /content -->
+
+</div><!-- /page -->
+
+
+
+<div data-role="page" data-theme="b" id="loginPage">
+    <div data-role="header" data-theme="b">
+        <h1 tkey="loginpootle"></h1>
+    </div>
+
+    <div data-role="content" data-theme="b" id="Login_Content">
+        <input type="text" id="username" placeholder="Kullanıcı Adı">
+        <input type="password" id="password" placeholder="Parola :)">
+        <input type="checkbox" value="true" id="remember">
+        <label for="remember" tkey="remember"></label>
+        <button type="button" value="Button" onclick="startApp()"> Login</button>
+    </div>
+</div>
+
+
+<div data-role="page" data-theme="b" id="languagesPage">
+
+
+    <div data-role="header" data-position="fixed">
+
+        <div id="aboutButton">
+                
+            <button tkey="about" data-icon="bullets" class="ui-btn-left"></button>
+
+        </div>
+
+
+
+        <h1 tkey="languages"></h1>
+
+        <div id="cancel">
+                
+            <button tkey="cancel2" data-icon="delete" class="ui-btn-right"></button>
+
+        </div>
+    </div>
+    <ul id="Languages_Content" data-role="listview" data-theme="b"></ul>
+</div>
+
+<div data-role="page" data-theme="b" id="about">
+    <div data-role="header" data-add-back-btn="true" data-back-btn-text="Geri" data-position="fixed">
+        <h1 tkey="about"></h1>
+
+        <p>Esra ALTINTAŞ</p>
+
+        <p><a href="mailto:es.altintas@gmail.com" target="_top">es.altintas@gmail.com</a></p>
+
+        <p><a data-role="button" data-theme="a" data-transition="fade" href="https://github.com/COMU/pootle-mobile/tree/phonegap-pootle" data-prefetch>Github</a></p>
+
+
+        <header >Version</header>
+        <p>1.0.1</p>
+
+
+        <p><a data-role="button" data-theme="a" data-transition="fade" href="http://www.gnu.org/licenses/gpl-2.0.html" data-prefetch>GPL</a></p>
+
+    </div>
+
+</div>
+
+
+<div data-role="page" data-theme="b" id="projectsPage">
+    <div data-role="header" data-position="fixed">
+        <div id="aboutButton2">
+                
+            <button tkey="about" data-icon="bullets" class="ui-btn-left"></button>
+
+        </div>
+        <div id="cancel2">
+                
+            <button tkey="cancel2" data-icon="delete" class="ui-btn-right"></button>
+
+        </div>
+        <h1 tkey="projects"></h1>
+    </div>
+    <ul id="Projects_Content" data-role="listview" data-theme="b" data-inset="true"></ul>
+
+</div>
+
+<div data-role="page" data-theme="b" id="filesPage">
+    <div data-role="header" data-position="fixed">
+        <div id="aboutButton3">
+                
+            <button tkey="about" data-icon="bullets" class="ui-btn-left"></button>
+
+        </div>
+        <div id="cancel3">
+                
+            <button tkey="cancel2" data-icon="delete" class="ui-btn-right"></button>
+
+        </div>
+        <h1 tkey="files"></h1>
+    </div>
+    <table id="fileTable" data-role="table" data-mode="column">
+        <thead>
+        <tr>
+            <th tkey="filename"></th>
+            <th tkey="percent"></th>
+        </tr>
+        </thead>
+        <tbody id="Files_Content"></tbody>
+    </table>
+</div>
+
+<div data-role="page" data-theme="b" id="aboutFilePage">
+    <div data-role="header"  data-position="fixed">
+        <div id="aboutButton4">
+                
+            <button tkey="about" data-icon="bullets" class="ui-btn-left"></button>
+
+        </div>
+        <div id="cancel4">
+                
+            <button tkey="cancel2" data-icon="delete" class="ui-btn-right"></button>
+
+        </div>
+        <h1 id="FileName"></h1>
+    </div>
+    <table id="AboutFileTable" data-role="table" data-mode="column">
+        <thead>
+        <tr>
+            <th tkey="total"></th>
+            <th tkey="needtranslate"></th>
+            <th tkey="fuzzy"></th>
+        </tr>
+        </thead>
+        <tbody id="AboutFiles_Content"></tbody>
+    </table>
+</div>
+
+<
+<div data-role="page" data-theme="b" id="TranslatePage">
+    <div data-role="header"  data-position="fixed">
+        <div id="aboutButton5">
+                
+            <button tkey="about" data-icon="bullets" class="ui-btn-left"></button>
+
+        </div>
+        <div id="cancel5">
+                
+            <button tkey="cancel2" data-icon="delete" class="ui-btn-right"></button>
+
+        </div>
+        <h1 id="file_name"></h1>
+    </div>
+    <div id="TranslateEnglish">
+
+    </div>
+
+    <div id="TranslateTurkish">
+
+
+    </div>
+    <table>
+        <tr>
+            <td>
+                <button id="gonder" type="submit" value="Gonder" tkey="send"></button>
+            </td>
+            <td>
+                <button id="oner" type="button" value="Oner" tkey="suggest"> Öner</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="onceki" type="button" value="Onceki" tkey="previous"> Önceki</button>
+            </td>
+            <td>
+                <button id="sonraki" type="button" value="Sonraki" tkey="next"> Sonraki</button>
+            </td>
+        </tr>
+    </table>
+
+
+
+</div>

@@ -1,0 +1,79 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: node-gettext\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+msgid "welcome"
+msgstr "welcome"
+
+msgid "dontaccount"
+msgstr "You don't have an account?"
+
+msgid "newrecord"
+msgstr "New Record"
+
+msgid "about"
+msgstr "About"
+
+msgid "loginpootle"
+msgstr "Pootle Login"
+
+msgid "remember"
+msgstr "Remember"
+
+msgid "languages"
+msgstr "Languages"
+
+msgid "projects"
+msgstr "Projects"
+
+msgid "files"
+msgstr "Files"
+
+msgid "filename"
+msgstr "File Name"
+
+msgid "percent"
+msgstr "Percent"
+
+msgid "total"
+msgstr "Total"
+
+msgid "needtranslate"
+msgstr "NeedTranslate"
+
+msgid "fuzzy"
+msgstr "Fuzzy"
+
+msgid "send"
+msgstr "Send"
+
+msgid "suggest"
+msgstr "Suggest"
+
+msgid "previous"
+msgstr "Previous"
+
+msgid "next"
+msgstr "Next"
+
+msgid "nickName"
+msgstr "Nickname"
+
+msgid "serverAddress"
+msgstr "Server Address"
+
+msgid "userName"
+msgstr "User Name"
+
+msgid "password"
+msgstr "Password"
+
+msgid "save"
+msgstr "Save"
+
+msgid "cancel"
+msgstr "Cancel"

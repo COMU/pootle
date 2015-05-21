@@ -1,0 +1,79 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: node-gettext\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+msgid "welcome"
+msgstr "hoşgeldiniz"
+
+msgid "dontaccount"
+msgstr "Hesabınız mı yok?"
+
+msgid "newrecord"
+msgstr "Yeni Kayıt"
+
+msgid "loginpootle"
+msgstr "Pootle Giriş"
+
+msgid "remember"
+msgstr "Hatırla"
+
+msgid "languages"
+msgstr "Diller"
+
+msgid "projects"
+msgstr "Projeler"
+
+msgid "files"
+msgstr "Dosyalar"
+
+msgid "filename"
+msgstr "Dosya Adı"
+
+msgid "about"
+msgstr "Hakkında"
+
+msgid "percent"
+msgstr "İlerleme"
+
+msgid "total"
+msgstr "Toplam"
+
+msgid "needtranslate"
+msgstr "Çevirilmemiş"
+
+msgid "fuzzy"
+msgstr "Çalışma Gerekli"
+
+msgid "send"
+msgstr "Gönder"
+
+msgid "suggest"
+msgstr "Öner"
+
+msgid "previous"
+msgstr "Önceki"
+
+msgid "next"
+msgstr "Sonraki"
+
+msgid "nickName"
+msgstr "Takma Ad"
+
+msgid "serverAddress"
+msgstr "Sunucu Adresi"
+
+msgid "userName"
+msgstr "Kullanıcı Adı"
+
+msgid "password"
+msgstr "Parola"
+
+msgid "save"
+msgstr "Kaydet"
+
+msgid "cancel"
+msgstr "İptal"
