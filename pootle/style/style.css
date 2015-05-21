@@ -3,16 +3,114 @@
     width: 17% !important;
     padding: 5px;
 }*/
+#textarea{
+	margin-left:5%;
+	margin-right:20%;
+	background-color:#C6E466;
+}
+
+.ybutton {
+	width:90%;
+	margin-top:1rem;
+	margin-left:5%;
+	margin-right:20%;
+	padding:1.5rem 2.5rem;
+	font-size: 1.1rem;
+   border-top: 1px solid #ffffff;
+   background: #bae3ff;
+   background: -webkit-gradient(linear, left top, left bottom, from(#209ae6), to(#bae3ff));
+   background: -webkit-linear-gradient(top, #209ae6, #bae3ff);
+   background: -moz-linear-gradient(top, #209ae6, #bae3ff);
+   background: -ms-linear-gradient(top, #209ae6, #bae3ff);
+   background: -o-linear-gradient(top, #209ae6, #bae3ff);
+  /* padding: 20px 40px;*/
+   -webkit-border-radius: 40px;
+   -moz-border-radius: 40px;
+   border-radius: 40px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: white;
+   
+   font-family: Georgia, Serif;
+   text-decoration: none;
+   vertical-align: middle;
+   }
+.ybutton:hover {
+   border-top-color: #ffffff;
+   background: #ffffff;
+   color: #453fe3;
+   }
+.ybutton:active {
+   border-top-color: #f7fcff;
+   background: #f7fcff;
+   }
+
+.button {
+	width:80%;
+	margin-top:1rem;
+	margin-left:10%;
+	margin-right:20%;
+	padding:1.5rem 2.5rem;
+	font-size: 1.1rem;
+   border-top: 1px solid #ffffff;
+   background: #bae3ff;
+   background: -webkit-gradient(linear, left top, left bottom, from(#209ae6), to(#bae3ff));
+   background: -webkit-linear-gradient(top, #209ae6, #bae3ff);
+   background: -moz-linear-gradient(top, #209ae6, #bae3ff);
+   background: -ms-linear-gradient(top, #209ae6, #bae3ff);
+   background: -o-linear-gradient(top, #209ae6, #bae3ff);
+  /* padding: 20px 40px;*/
+   -webkit-border-radius: 40px;
+   -moz-border-radius: 40px;
+   border-radius: 40px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: white;
+   
+   font-family: Georgia, Serif;
+   text-decoration: none;
+   vertical-align: middle;
+   }
+.button:hover {
+   border-top-color: #ffffff;
+   background: #ffffff;
+   color: #453fe3;
+   }
+.button:active {
+   border-top-color: #f7fcff;
+   background: #f7fcff;
+   }
+
+
+
 img{
     max-width: 10% !important;
     width: 10% !important;
     padding: 3px;
+}
+
+img.logo{
+	max-width: 25% !important;
+    width: 25% !important;
+    padding: 3px;
+}
+img.giris{
+	max-width: 30% !important;
+    width: 30% !important;
+    padding: 3px;
+	margin-left: 35%;
+	margin-right:10%;
 }
 #field td.mine{
     background: url("mine_small.jpg") red no-repeat center;
   }
 body{
 	margin:0;
+	background-size:100% 100%;
 }
 
 p, li > p {

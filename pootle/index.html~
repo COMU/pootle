@@ -5,6 +5,8 @@
 		<script src='js/jquery-2.1.0.min.js'></script>
 		<script src='js/brick-1.0.1.js'></script>
 		<script src='js/script.js'></script>
+		<script src="js/md5.js"></script>
+
 		
 		<link type='text/css' href='style/lists.css' rel="stylesheet">
 		<link type='text/css' href='style/toolbars.css' rel="stylesheet">
@@ -55,7 +57,11 @@
 				<x-layout id='search_layout'>
 					<header class='top-menu colorBlue'>
 						<button disabled></button>
-						<h1>POOTLE</h1>
+						<menu type="toolbar">
+						    <button id='toAbout'><span class="mega-octicon octicon-question"></span></button>
+						</menu>
+						
+						<h1><img class="logo" src="pootle.jpg" alt="Örnek Resim"  align="left"><center>POOTLE</center></h1>
 						
 					</header>
 					<section id='search_section'>
@@ -72,47 +78,48 @@
 						                                    <div id="tablepage"></div>
 						                                    <table id="field"></table>
 <div id="start">
-		<button id='kaydol' data-l10n-id="kaydol" class='btn-success input buttonBlue'>REGISTER</button>
-	  <button id='giris' class='btn-success input buttonBlue'>OTURUM AÇ</button>
-</div>		
+	    <img class="giris" src="pootle.jpg" alt="Örnek Resim" align="center">
+	   <body background="arka-plan.jpg">
+	 
+		<button id='kaydol' data-l10n-id="kaydol" class='btn-success button buttonBlue'>REGISTER</button>
+	  <button id='giris' data-l10n-id="giris"class='btn-success button buttonBlue'>LOGIN</button>
+	
+</script>
+
+
+			 </div>		
 <div id="registerresult">		
-</div>
+</div> 
 <div id="kayit">
-	<button id='logp' class='btn-success buttonBlue'>BACK</button>				
-	<input name='isim' placeholder='İsim'class='input form-control'>
-  <input name='sunucu' placeholder='Sunucu Adı'class='input form-control'>
-	<input name='namekayit' placeholder='Username'class='input form-control'>
-	<input name='passwordkayit' placeholder='Password'class='input form-control'input type='password'>					
-	<button id='rkayit' class='btn-success input buttonBlue'>KAYDET</button>					
+	
+			 <input type="image" value="submit" src="geri.jpg" height="40" width="40" id='logp' />
+	
+     
+	<input name='isim' placeholder=' Name'class='input form-control'>
+	<input name='sunucu' placeholder='Server Name'class='input form-control'>
+	<input name='namekayit' placeholder=' Username'class='input form-control'>
+	<input name='passwordkayit' placeholder='Password'class='input form-control'input type='password'>
+	  
+						
+	<button id='rkayit' data-l10n-id='rkayit'class='btn-success input buttonBlue'>SAVE</button>					
 </div>
 <div id="cevir">	
-<tr><td><button id='tableback' class='btn-success buttonBlue'>BACK</button></td><td><button id='logout' class='btn-success buttonBlue'>LOGOUT</button></td></tr>	
+<tr><td> <input type="image" value="submit" src="geri.jpg" height="40" width="40" id='tableback' /></td><td><input type="image" value="submit" src="logout.jpg" height="40" width="40" align="right" id='logout' /></td></tr>	
 <p id="kelime" ></p>
-<textarea id="cevrilen" style="width:95%" rows="6"></textarea>
+<textarea id="cevrilen" style="width:95%" rows="6"  background-color:"blue" padding-left:"9px"></textarea>
 <p id="koneri" ></p>
  <p id="oneri1" ></p>
  <p id="oneri2" ></p>
  <p id="oneri3" ></p>
  <p id="oneri4" ></p>
  <p id="oneri5" ></p>
-		  <table>
-<tr>
-<td>
-	<button id='gonder' class='btn-success input buttonBlue' >GÖNDER</button>
-</td>
-<td>
-<button id='oner' class='btn-success input buttonBlue' >ÖNER</button> 
-</td>
-</tr>
-<tr>
-<td>
-<button id='onceki' class='btn-success input buttonBlue' >ÖNCEKİ</button> 
-</td>
-<td>
-<button id='sonraki' class='btn-success input buttonBlue' >SONRAKİ</button>
-</td>
-</tr>
-</table>
+		  
+
+	<button id='gonder' data-l10n-id="gonder"class='btn-success button buttonBlue' >SEND</button>
+
+<tr><td><input type="image" value="submit" src="solok.jpg" height="50" width="50" id='onceki' align="left"/></td><td><input type="image" value="submit" src="sgok.jpg" height="50" width="50" id='sonraki' align="right"/></td>
+
+
 		</div>
 					</section>
 					
@@ -188,37 +195,35 @@
 							<button disabled></button>
 						</menu>
 						<button class='toSearch'><span class="mega-octicon octicon-arrow-left"></span></button>
-						<h1>About</h1>
+						<h1 data-l10n-id='out'>About</h1>
 					</header>
 					<section id='about_page' data-type='list'>
-						<p>GitRSS allows you to keep an eye on github commits, in this version notifications <strong>aren't</strong> implemented.
-						We'll add notifications and others features with the upcoming releases.</p>
-						<header class="listheaderBlue borderBlue">Version</header>
-						<p>1.0.1</p>
-						<header class="listheaderBlue borderBlue">Developers</header>
-						<p><strong>nag</strong> [, say /neg]:
-							<br>
-							<a href='#' class='link' id='nicokant'>@nicokant</a>
-							<br>
-							<a href='#' class='link' id='aro94'>@aro94</a>
-							<br>
-							special thanks to <a href="#" id='giuscri' class='link'>@giuscri</a>
-						</p>
+						<header class="listheaderBlue borderBlue" data-l10n-id='ver'>Version</header>
+						<p>1.1</p>
+						<header class="listheaderBlue borderBlue" data-l10n-id='dev'>Developer</header>
+						<p><strong>Melek Kahraman</strong> 
+						<header class="listheaderBlue borderBlue" data-l10n-id='deve'>Developer's e-mail</header>
+						<p>melekkah12@gmail.com</p> 
+						<header class="listheaderBlue borderBlue" data-l10n-id='lis'> LICENSE</header>
+						<p>    GNU GENERAL PUBLIC LICENSE
+                       Version 2, June 1991
+
+ Copyright (C) 1989, 1991 Free Software Foundation, Inc., <http://fsf.org/>
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+ Everyone is permitted to copy and distribute verbatim copies
+ of this license document, but changing it is not allowed.</p> 
+						<header class="listheaderBlue borderBlue"></header>
+						<a href="https://github.com/melekkahraman/Pootle"><header class="listheaderBlue borderBlue" data-l10n-id='co'>CODES</header></a>
+						
 						<p>support us with a review on Mozilla Market Place!</p>
-						<button id='gitfeed' class='buttonBlue'></button>
 					</section>
-					<footer role="toolbar" class='colorBlue'>
-						<ul>
-							<li><a href='#' class='toStarred linkBlue'>Bookmarks</a></li>
-						</ul>
-						<ul>
-							<li><a href='#' class='toHistory linkBlue'>History</a></li>
-						</ul>
-					</footer>
 				</x-layout>
 			</x-card>
 			
 		</x-deck>
+		
+
+			
 
 <div id="placeholder"></div>
 	</body>

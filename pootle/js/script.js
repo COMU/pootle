@@ -13,14 +13,34 @@ var rarray= new Array();
 var rrarray=0;
 var rlength;
 var register;
+
+
+if (document.getElementById||document.all)
+start=setInterval("animatein()",50)
 $(document).ready(function() {
   $("#cevir").fadeOut();
     $("#registerresult").fadeOut();
     $("#kayit").fadeOut();
    $("#inputs").fadeOut();
    $("#start").fadeIn();
+   $(document).on('click','#toAbout',function(){
+		goToCard(4);
+	});
+   $(document).on('click','.toSearch',function(){
+		goToCard(0);
+	});
+	
+
+   
    
 });
+
+function goToCard(cardNum){
+	document.querySelector('x-deck').showCard(cardNum);
+	
+	
+}
+
 function noconnect(){
    results.innerHTML = "";
    $("#cevir").fadeOut();
@@ -31,10 +51,16 @@ function noconnect(){
 }
 $(document).on('click','#rkayit',function(){
   rusername=$('input[name=namekayit]').val();
-	 rpassword=$('input[name=passwordkayit]').val();
+	//rpassword=CryptoJS.MD5($('input[name=passwordkayit]').val());
+   rpassword=$('input[name=passwordkayit]').val();
    risim=$('input[name=isim]').val();
 	 rsunucu=$('input[name=sunucu]').val();
-		
+  
+
+		 var hash = CryptoJS.MD5("rpassword");
+  
+   
+   
 		if(rusername == '' || rpassword== ''|| risim==''|| rsunucu== ''){
        var insert="Please insert values";
 			alert(insert);
@@ -50,6 +76,7 @@ function newbutton(){
    rarray[rrarray]=new Array(risim,rsunucu,rusername,rpassword);
    rrarray=rrarray+1;
    alert(basari);
+   
   $('input[name=passwordkayit]').val("");
 	 $('input[name=namekayit]').val("");
    $('input[name=isim]').val("");
@@ -113,7 +140,9 @@ $(document).on('click','#logp',function(){
 function listsil(){
     results.innerHTML = "";
    rlength=rarray.length;
-   results.innerHTML +="<button id='listback' data-l10n-id='back' class='btn-success im buttonBlue'>"+"BACK"+"</button>";
+  // results.innerHTML +="<button id='listback' data-l10n-id='back' class='btn-success im buttonBlue'>"+"BACK"+"</button>";
+  results.innerHTML +='<input type="image" value="submit" src="geri.jpg" height="40" width="40"'+ "id='listback' />";
+  
    results.innerHTML +="<p id='siltext' data-l10n-id='siltext'>"+"Tap the list you want to delete element"+'<p/>';
    
     ss=$("#siltext")
@@ -123,7 +152,7 @@ function listsil(){
          i=i+1;
          }
       results.innerHTML +='<p>'+rarray[i][1]+'</p>' 
-      results.innerHTML +='<header class="listheaderBlue borderBlue">'+"<li><a href='#' id='rmm' i=" + i + "><button id='rid' class='btn-success startlist buttonBlue'>"+rarray[i][0]+"</button></a></li>";
+      results.innerHTML +='<header class="listheaderBlue borderBlue">'+"<li><a href='#' id='rmm' i=" + i + "><button id='rid' class='btn-success ybutton buttonBlue'>"+rarray[i][0]+"</button></a></li>";
 
    }
 }
@@ -144,14 +173,18 @@ function loginpage(){
    rlength=rarray.length;
    results.innerHTML = "";
 
-   results.innerHTML +="<tr><td><button id='logp' data-l10n-id='back' class='btn-success im buttonBlue'>"+"BACK"+"</button></td><td><button id='sil' data-l10n-id='sil' class='btn-success im buttonBlue'>"+"DELETE"+"</button></td></tr>";
+   results.innerHTML +="<tr><td>"+'<input type="image" value="submit" src="geri.jpg" height="40" width="40"'+ "id='logp' />"+"</td><td>"+'<input type="image" value="submit" src="delete.jpg" height="35" width="35"'+"id='sil' />"+"</td></tr>";
+   //results.innerHTML +="<tr><td>"+"<button id='logp'><span class='mega-octicon octicon-arrow-left'>"+"</span></button>"+"</td><td><button id='sil' data-l10n-id='sil' class='btn-success im buttonBlue'>"+"DELETE"+"</button></td></tr>";
+   
+   
    for(i=0;i<rlength;i++){
       while(rarray[i][0]==undefined){
          i=i+1;
          }
        //results.innerHTML +='<p>'+rarray[i][1]+'</p>'  
-      results.innerHTML +='<header class="listheaderBlue borderBlue">'+"<li><a href='#' id='rk' i=" + i + "><button id='rid' class='btn-success startlist buttonBlue'>"+rarray[i][0]+"</button></a></li>";
-       
+      
+      results.innerHTML +="<li style='list-style-type:none'><a href='#' id='rk' i=" + i + "><button id='rid' class='btn-success ybutton buttonBlue'>"+rarray[i][0]+"</button></a></li>";
+      
       //results.innerHTML +='<header class="listheaderBlue borderBlue">'+"<ul class='stlist' style='list-style-type:none'><li><a href='#' id='rk' i=" + i + "><button id='rid' class='btn-success input buttonBlue'>"+rarray[i][0]+"</button></a></li></ul>";
      
    }
@@ -295,7 +328,8 @@ $(document).on('click','#tableback',function(){
     $("#registerresult").fadeOut();
          $("#results").fadeIn();
     results.innerHTML = "";
-   results.innerHTML +="<button id='logout' data-l10n-id='logout' class='btn-success im buttonBlue'>"+"LOGOUT"+"</button>";
+   results.innerHTML+= '<input type="image" value="submit" src="logout.jpg" height="40" width="40"'+"align='right'"+"id='logout'/>";
+   results.innerHTML +='<h3 id="lcss" ><center data-l10n-id="lcss">'+"Languages"+'</center></h3>';
 
                              
                 // array[i]= obj.objects[i].fullname+"<hr/>"; 
@@ -311,8 +345,15 @@ $(document).on('click','#tableback',function(){
         
                  var languagecss='<p id=css>'+obj.objects[i].fullname+'</p>'          //results.innerHTML +='<header class="listheaderBlue borderBlue "></header>'+'<a  id="foo" i=' + i  +' href="#"'+ obj.objects[i].fullname +'></a>'; 
       // results.innerHTML +='<header class="listheaderBlue borderBlue">'+'<ul id="menn" data-role="listview" data-inset="true" class="listview"><li><a href="#" id="foo"  i=' + i + '>'+languagecss+'</a></li>'+ '</ul>'+'</header>'; 
-            results.innerHTML +='<header class="listheaderBlue borderBlue">'+'<ul data-role="listview" data-inset="true" class="listview"><li><a href="#" id="foo"  i=' + i + '>'+'<h5>'+'<img src="http://www.dijitalteknoloji.net/wp-content/uploads/2012/04/foldercolorizer.jpg"' + languagecss +'</h5>'+'</a></li>'+ '</ul>'+'</header>';           
-//results.innerHTML +='<header class="listheaderBlue borderBlue">'+'<ul style="list-style-image:http://www.dijitalteknoloji.net/wp-content/uploads/2012/04/foldercolorizer.jpg" data-role="listview" data-inset="true" class="listview"><li><a href="#" id="foo"  i=' + i + '>'+'<h5>' + languagecss +'</h5>'+'</a></li>'+ '</ul>'+'</header>';           
+            //results.innerHTML +='<header class="listheaderBlue borderBlue">'+'<ul data-role="listview" data-inset="true" class="listview"><li><a href="#" id="foo"  i=' + i + '>'+'<h5>'+'<img src="http://www.dijitalteknoloji.net/wp-content/uploads/2012/04/foldercolorizer.jpg"' + languagecss +'</h5>'+'</a></li>'+ '</ul>'+'</header>';           
+
+             results.innerHTML +='<header class="listheaderBlue borderBlue">'+'<ul data-role="listview" data-inset="true" class="listview"><li><a href="#" id="foo"  i=' + i + '>'+'<h5>'+'<img src="http://icons.iconarchive.com/icons/hopstarter/mac-folders/256/Documents-icon.png"' + languagecss +'</h5>'+'</a></li>'+ '</ul>'+'</header>';           
+   p = $("#lcss");
+   //p.css("size","42");      
+   p.css( "face","Angostura Black");
+   p.css("color", "blue");
+               
+                 //results.innerHTML +='<header class="listheaderBlue borderBlue">'+'<ul style="list-style-image:http://www.dijitalteknoloji.net/wp-content/uploads/2012/04/foldercolorizer.jpg" data-role="listview" data-inset="true" class="listview"><li><a href="#" id="foo"  i=' + i + '>'+'<h5>' + languagecss +'</h5>'+'</a></li>'+ '</ul>'+'</header>';           
   
   //results.innerHTML +='<header class="listheaderBlue borderBlue">'+'<ul data-role="listview" data-inset="true" class="listview"><li><a href="#" id="foo"  i=' + i + '>'+'<h5>'+'<img src="http://www.dijitalteknoloji.net/wp-content/uploads/2012/04/foldercolorizer.jpg"/>' + languagecss +'</h5>'+'</a></li>'+ '</ul>'+'</header>';           
           
@@ -470,7 +511,8 @@ function ceviris(){
 function ssonuc(){
    results.innerHTML = "";
    $('#kelime').html("");
-   $("<p>" + deger+ "</p>").appendTo('#kelime');
+   //results.innerHTML=("<frameset cols='50%,50%'><frame src=" + deger+ "></frameset>");
+   $("<h4>" + deger+ "<h4>").appendTo('#kelime');
    $('textarea').val(value);
    $('#koneri').html("");
    $("<p>" +""+ "</p>").appendTo('#koneri');
@@ -489,7 +531,11 @@ function ssonuc(){
    $("#cevir").fadeIn();
    //results.innerHTML +=" <tr><td><button id='tableback' class='btn-success buttonBlue'>"+"BACK"+"</button></td><td><button id='logout' class='btn-success buttonBlue'>"+"LOGOUT"+"</button></td></tr>";
    p = $("#kelime");
-   p.css("border", "1px solid blue");
+   p.css("size","4");
+   p.css( "face","Angostura Black");
+   p.css("border", "dotted blue");
+  // bgcolor="#33ffff"
+  // p.css("bgcolor","white");
    p.css("color", "blue");
 }
 var text;
@@ -503,7 +549,7 @@ function sonuc(){
    results.innerHTML = "";
    text="User Suggestions"
    $('#kelime').html("");
-   $("<p>" + deger+ "</p>").appendTo('#kelime');
+   $("<h4>" + deger+ "</h4>").appendTo('#kelime');
    $('textarea').val(value);
    $('#koneri').html("");
    $("<p id='text' data-l10n-id='text'>" +text+ "</p>").appendTo('#koneri');
@@ -531,8 +577,11 @@ function sonuc(){
    t = $("#textarea");
    t.css("border", "blue");
    t.css("color", "blue");
-   p = $("#kelime");
-  p.css("border", "1px solid blue");
+  p = $("#kelime");
+ // p.css("border", "1px dotted blue");
+    p.css("size","4");
+   p.css( "face","Angostura Black");
+   p.css("border", "dotted blue");
   p.css("color", "blue");
   o1 = $("#oneri1");
   o1.css("color", "blue");
@@ -1003,8 +1052,11 @@ function files(){
    }
    function list(){
     results.innerHTML = "";
-   results.innerHTML +=" <tr><td><button id='projeback' data-l10n-id='back' class='btn-success im buttonBlue'>"+"BACK"+"</button></td><td><button id='logout' data-l10n-id='logout' class='btn-success im buttonBlue'>"+"LOGOUT"+"</button></td></tr>";
-
+   results.innerHTML +=" <tr><td>"+'<input type="image" value="submit" src="geri.jpg" height="40" width="40"'+ "id='projeback' />"+"</td><td>"+'<input type="image" value="submit" src="logout.jpg" height="40" width="40"'+"align='right'"+"id='logout'/>"+"</td></tr>";
+   results.innerHTML +='<h3 id="fcss" ><center data-l10n-id="fcss">'+"Files"+'</center></h3>';
+  p = $("#fcss");
+   p.css( "face","Angostura Black");
+   p.css("color", "blue");
       
   for (i=0;i<flength;i++) {
      var filecss='<p id=css>'+farray[i]+'</p>'   
@@ -1105,13 +1157,17 @@ function projects(){
  
  function liste(){
      results.innerHTML = "";
-   results.innerHTML +=" <tr><td><button id='languageback' data-l10n-id='back' class='btn-success im buttonBlue'>"+"BACK"+"</button></td><td><button id='logout' data-l10n-id='logout' class='btn-success im buttonBlue'>"+"LOGOUT"+"</button></td></tr>";
-
+     
+   results.innerHTML +=" <tr><td>"+'<input type="image" value="submit" src="geri.jpg" height="40" width="40"'+ "id='languageback' />"+"</td><td>"+'<input type="image" value="submit" src="logout.jpg" height="40" width="40"'+"align='right'"+"id='logout'/>"+"</td></tr>";
+results.innerHTML +='<h3 id="pcss" ><center data-l10n-id="pcss">'+"Projects"+'</center></h3>';
+  p = $("#pcss");
+   p.css( "face","Angostura Black");
+   p.css("color", "blue");
   
   for (i=0;i<length;i++) {
             
                          var projectcss='<p id=css>'+array[i]+'</p>'   
-                         results.innerHTML +='<header class="listheaderBlue borderBlue">'+'<ul data-role="listview" data-inset="true" class="listview"><li><a href="#" id="project"  i=' + i + '>'+'<h5>'+'<img src="http://www.dijitalteknoloji.net/wp-content/uploads/2012/04/foldercolorizer.jpg"' + projectcss+'</h5>'+'</a></li>'+ '</ul>'+'</header>';           
+                         results.innerHTML +='<header class="listheaderBlue borderBlue">'+'<ul data-role="listview" data-inset="true" class="listview"><li><a href="#" id="project"  i=' + i + '>'+'<h5>'+'<img src="http://icons.iconarchive.com/icons/hopstarter/mac-folders/256/Documents-icon.png"' + projectcss+'</h5>'+'</a></li>'+ '</ul>'+'</header>';           
             
                         // results.innerHTML +='<header class="listheaderBlue borderBlue ">'+'<ul data-role="listview" data-inset="true" class="list"><li><a href="#" id="project" i=' + i + '>' + array[i] +'</a></li>'+ '</ul>'+'</header>'; 
                             
@@ -1124,7 +1180,7 @@ var ceviributton=0;
 function cevirigerekli(){
    $("#registerresult").fadeOut();
    results.innerHTML = "";
-   results.innerHTML +=" <tr><td><button id='tableback' data-l10n-id='back' class='btn-success im buttonBlue'>"+"BACK"+"</button></td><td><button id='logout' data-l10n-id='logout' class='btn-success im buttonBlue'>"+"LOGOUT"+"</button></td></tr>";
+   results.innerHTML +=" <tr><td>"+'<input type="image" value="submit" src="geri.jpg" height="40" width="40"'+ "id='tableback' />"+"</td><td>"+'<input type="image" value="submit" src="logout.jpg" height="40" width="40"'+"align='right'"+"id='logout'/>"+"</td></tr>";
 
    var data = JSON.parse(newrequest.response);
    stringdata=JSON.stringify(data);
@@ -1257,16 +1313,16 @@ function tablee(){
                         topp=obj.statistics.total.words;
                        need=obj.statistics.untranslated.words;
              results.innerHTML = "";
-              results.innerHTML +=" <tr><td><button id='fileback' data-l10n-id='back' class='btn-success im buttonBlue'>"+"BACK"+"</button></td><td><button id='logout' data-l10n-id='logout' class='btn-success im buttonBlue'>"+"LOGOUT"+"</button></td></tr>";
+              results.innerHTML +=" <tr><td>"+'<input type="image" value="submit" src="geri.jpg" height="40" width="40"'+ "id='fileback' />"+"</td><td>"+'<input type="image" value="submit" src="logout.jpg" height="40" width="40"'+"align='right'"+"id='logout'/>"+"</td></tr>";
 
-             results.innerHTML += '<table><tr><td><p id="t" data-l10n-id="t" >' + t + '</p></td><td><p id="cg" data-l10n-id="cg" >'+cg+'</p></td></tr><tr><td><button id="toplam" class="btn-success input buttonBlue" ><p id="t1" >'+topp+'</p></button></td><td><button id="cevirigerekli" class="btn-success input buttonBlue"><p id="t2" >'+need+'</p></button></td></tr></table>';
+             results.innerHTML += '<table><tr><td><p id="t" data-l10n-id="t" >' + t + '</p></td><td><p id="cg" data-l10n-id="cg" >'+cg+'</p></td></tr><tr><td><button id="toplam" class="btn-success button buttonBlue" ><p id="t1" >'+topp+'</p></button></td><td><button id="cevirigerekli" class="btn-success button buttonBlue"><p id="t2" >'+need+'</p></button></td></tr></table>';
     
              
    t1 = $("#cg");
-   t1.css("border", "2px solid blue");
+   t1.css("border", "2px dotted blue");
    t1.css("color", "blue");       
    t2= $("#t");
-   t2.css("border", "2px solid blue");
+   t2.css("border", "2px dotted blue");
    t2.css("color", "blue");    
               }
   }
