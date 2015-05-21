@@ -42,7 +42,7 @@ msgstr "İlerleme"
 msgid "total"
 msgstr "Toplam"
 
-msgid "needtranlate"
+msgid "needtranslate"
 msgstr "Çevirilmemiş"
 
 msgid "fuzzy"

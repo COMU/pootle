@@ -22,5 +22,6 @@
     "userName": "Kullanıcı Adı",
     "password": "Parola",
     "save": "Kaydet",
-    "cancel": "İptal"
+    "cancel": "İptal",
+    "cancel2": "Çıkış"
 }

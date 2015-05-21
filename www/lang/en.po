@@ -42,8 +42,8 @@ msgstr "Percent"
 msgid "total"
 msgstr "Total"
 
-msgid "needtranlate"
-msgstr "Need Translate"
+msgid "needtranslate"
+msgstr "NeedTranslate"
 
 msgid "fuzzy"
 msgstr "Fuzzy"

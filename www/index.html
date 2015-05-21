@@ -32,6 +32,7 @@
     <script type="text/javascript" src="js/jquery.mobile-1.4.4.min.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script src="js/lang.js"></script>
+    <script src="CryptoJS%20v3.1.2/rollups/md5.js"></script>
     <script type="text/javascript">
         //app.initialize();
 
@@ -48,26 +49,23 @@
            // tx.executeSql('DROP TABLE USER');
             /*localStorage.setItem("users", JSON.stringify([user1, user2]))
 
-             dashersw [11:18 PM]
              var users = JSON.parse(localStorage.getItem("users")) (edited)
 
-             dashersw [11:18 PM]
              users.push({ username: input.value }) (edited)
 
-             dashersw [11:19 PM]
              localStorage.setItem("users", JSON.stringify(users))
 
-             dashersw [11:19 PM]
+
              localStorage.setItem("users", JSON.stringify([]))
 
-             dashersw [11:19 PM]
-             localStorage.removeItem("users")*/
+
+             */
 //            localStorage.setItem("users", JSON.stringify([]));
 
 
             var user = {
                 userName: document.getElementById('txt-user-name').value,
-                password: document.getElementById('txt-password').value,
+                password: CryptoJS.MD5(document.getElementById('txt-password').value),
                 serverAddress: document.getElementById('txt-server-address').value,
                 nick: document.getElementById('txt-nick-name').value
             };
@@ -78,6 +76,8 @@
             users.push(user);
 
             localStorage.setItem('users', JSON.stringify(users));
+
+//            localStorage.removeItem("users")
 
             alert("success!");
 
@@ -110,11 +110,15 @@
         <h2 class="mc-text-center" translate></h2>
 
 
-        <p tkey="dontaccount" class="mc-top-margin-1-5"><b></b></p>
+
 
         <div id="divList">
 
         </div>
+
+        </br>
+
+        <p tkey="dontaccount" class="mc-top-margin-1-5"></p>
 
         <a id="newrecord" tkey="newrecord" href="#recordpage" class="ui-btn ui-btn-b ui-corner-all"></a>
 
@@ -187,12 +191,19 @@
 
         <div id="aboutButton">
                 
-            <button tkey="about" data-icon="bullets" class="ui-btn-right"></button>
+            <button tkey="about" data-icon="bullets" class="ui-btn-left"></button>
 
         </div>
 
 
+
         <h1 tkey="languages"></h1>
+
+        <div id="cancel">
+                
+            <button tkey="cancel2" data-icon="delete" class="ui-btn-right"></button>
+
+        </div>
     </div>
     <ul id="Languages_Content" data-role="listview" data-theme="b"></ul>
 </div>
@@ -220,10 +231,15 @@
 
 
 <div data-role="page" data-theme="b" id="projectsPage">
-    <div data-role="header" data-add-back-btn="true" data-back-btn-text="Geri" data-position="fixed">
+    <div data-role="header" data-position="fixed">
         <div id="aboutButton2">
                 
-            <button tkey="about" data-icon="bullets" class="ui-btn-right"></button>
+            <button tkey="about" data-icon="bullets" class="ui-btn-left"></button>
+
+        </div>
+        <div id="cancel2">
+                
+            <button tkey="cancel2" data-icon="delete" class="ui-btn-right"></button>
 
         </div>
         <h1 tkey="projects"></h1>
@@ -233,10 +249,15 @@
 </div>
 
 <div data-role="page" data-theme="b" id="filesPage">
-    <div data-role="header" data-add-back-btn="true" data-back-btn-text="Geri" data-position="fixed">
+    <div data-role="header" data-position="fixed">
         <div id="aboutButton3">
                 
-            <button tkey="about" data-icon="bullets" class="ui-btn-right"></button>
+            <button tkey="about" data-icon="bullets" class="ui-btn-left"></button>
+
+        </div>
+        <div id="cancel3">
+                
+            <button tkey="cancel2" data-icon="delete" class="ui-btn-right"></button>
 
         </div>
         <h1 tkey="files"></h1>
@@ -253,10 +274,15 @@
 </div>
 
 <div data-role="page" data-theme="b" id="aboutFilePage">
-    <div data-role="header" data-add-back-btn="true" data-back-btn-text="Geri" data-position="fixed">
+    <div data-role="header"  data-position="fixed">
         <div id="aboutButton4">
                 
-            <button tkey="about" data-icon="bullets" class="ui-btn-right"></button>
+            <button tkey="about" data-icon="bullets" class="ui-btn-left"></button>
+
+        </div>
+        <div id="cancel4">
+                
+            <button tkey="cancel2" data-icon="delete" class="ui-btn-right"></button>
 
         </div>
         <h1 id="FileName"></h1>
@@ -275,10 +301,15 @@
 
 <
 <div data-role="page" data-theme="b" id="TranslatePage">
-    <div data-role="header" data-add-back-btn="true" data-back-btn-text="Geri" data-position="fixed">
+    <div data-role="header"  data-position="fixed">
         <div id="aboutButton5">
                 
-            <button tkey="about" data-icon="bullets" class="ui-btn-right"></button>
+            <button tkey="about" data-icon="bullets" class="ui-btn-left"></button>
+
+        </div>
+        <div id="cancel5">
+                
+            <button tkey="cancel2" data-icon="delete" class="ui-btn-right"></button>
 
         </div>
         <h1 id="file_name"></h1>

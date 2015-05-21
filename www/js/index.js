@@ -91,6 +91,7 @@ $(document).on("pagebeforeshow", "#loginPage", function () {
     console.log(apiRoot);
     console.log(userName);
     console.log(passWord);
+
     if (window.localStorage.getItem("username") && window.localStorage.getItem("password")) {
         startApp();
     }
@@ -107,50 +108,69 @@ function startApp() {
     //console.log(apix)
     if ($('#remember').is(':checked')) {
         // save username and password
+
         window.localStorage.setItem("username", $('#username').val());
         window.localStorage.setItem("password", $('#password').val());
     }
 
     $('#aboutButton').on("tap", function () {
 
-        console.log("es")
-        console.log(apix);
-        console.log(apiRoot)
         $.mobile.changePage("#about");
-        //$.mobile.changePage( "#loginPage");
+
+    });
+
+    $('#cancel').on("tap", function () {
+
+        $.mobile.changePage("#welcomepage");
 
     });
 
     $('#aboutButton2').on("tap", function () {
 
-        console.log("es")
         $.mobile.changePage("#about");
-        //$.mobile.changePage( "#loginPage");
+
+    });
+
+    $('#cancel2').on("tap", function () {
+
+        $.mobile.changePage("#welcomepage");
 
     });
 
     $('#aboutButton3').on("tap", function () {
 
-        console.log("es")
         $.mobile.changePage("#about");
-        //$.mobile.changePage( "#loginPage");
+
+    });
+
+    $('#cancel3').on("tap", function () {
+
+        $.mobile.changePage("#welcomepage");
 
     });
 
     $('#aboutButton4').on("tap", function () {
 
-        console.log("es")
         $.mobile.changePage("#about");
-        //$.mobile.changePage( "#loginPage");
+
+    });
+
+    $('#cancel4').on("tap", function () {
+
+        $.mobile.changePage("#welcomepage");
 
     });
 
 
     $('#aboutButton5').on("tap", function () {
 
-        console.log("es")
         $.mobile.changePage("#about");
-        //$.mobile.changePage( "#loginPage");
+
+    });
+
+    $('#cancel5').on("tap", function () {
+
+        $.mobile.changePage("#welcomepage");
 
     });
 
@@ -423,131 +443,6 @@ function startApp() {
 
     });
 
-    /* $(document).on("pageshow","#UnTranslatePage",function() {
-
-     var units = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units;
-     console.log(units);
-     var store = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex];
-
-     console.log(units[j])
-     var markup = '<textarea id="textarea" class="TranslateTurkish" > ' + units[j].target_f + ' </textarea>';
-     var markup2 = '<p class="TranslateEnglish">' + units[j].source_f + '</p>'
-     var markup3 = store.name;
-
-     $('#TranslateTurkish').html(markup);
-     $('#TranslateEnglish').html(markup2);
-     $('#file_name').html(markup3);
-
-     function sonraki() {
-     j=j+1;
-     getSelectedStateData(selectedlanguageIndex, selectedProjectIndex, selectedStoreIndex, j, function() {
-     var unit = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units[j];
-     markup = '<textarea class="TranslateTurkish" > ' + unit.target_f + ' </textarea>';
-     markup2 = '<p class="TranslateEnglish">' + unit.source_f + '</p>';
-
-     $('#TranslateTurkish').html(markup);
-     $('#TranslateEnglish').html(markup2);
-     });
-     };
-
-
-     $('#onceki').on("tap", function() {
-     if(j>0) {
-     j = j - 1;
-     var unit = projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units[j];
-     markup = '<textarea class="TranslateTurkish" > ' + unit.target_f + ' </textarea>';
-     markup2 = '<p class="TranslateEnglish">' + unit.source_f + '</p>';
-
-     $('#TranslateTurkish').html(markup);
-     $('#TranslateEnglish').html(markup2);
-     console.log(projects[selectedlanguageIndex].translation_projects[selectedProjectIndex].stores[selectedStoreIndex].units[j]);
-     }
-     });
-
-     $('#sonraki').on("tap", function() {
-     sonraki();
-     });
-
-
-     $('#gonder').on("tap", function() {
-     console.log(units[j].resource_uri);
-     units[j].target_f = document.getElementById('textarea').value;
-
-     $.ajax({
-     type: 'PUT',
-     url: apiRoot + units[j].resource_uri,
-     contentType: 'application/json',
-
-     headers: {
-     "Authorization": "Basic " + btoa(username + ":" + password )
-     },
-     data: JSON.stringify({
-     "target_f": units[j].target_f,
-     "target_length": units[j].target_f.split('').length,
-     "target_wordcount": units[j].target_f.split(' ').length,
-     "translator_comment": units[j].translator_comment,
-     "suggestions": ""}),
-
-     success: function(data) {
-     alert("gonderildi");
-     sonraki();
-
-     },
-     error: function (xhr, ajaxOptions, thrownError) {
-     alert(xhr.status);
-     alert(thrownError);
-     },
-     dataType: 'json'
-     });
-
-
-     });
-
-     $('#oner').on("tap", function() {
-     console.log(units.length);
-     console.log(units[j]);
-     var count=0;
-
-
-     console.log(units[0].suggestions.length)
-     console.log(count);
-     console.log(units[j].suggestions);
-     units[i].target_f = document.getElementById('textarea').value;
-
-     $.ajax({
-     type: 'POST',
-     url: apiRoot +'/api/v1/suggestions/',
-     contentType: 'application/json',
-
-     headers: {
-     "Authorization": "Basic " + btoa(username + ":" + password )
-     },
-     data: JSON.stringify({
-     "target_f": units[j].target_f,
-     "translator_comment_f": units[j].translator_comment,
-     "unit": units[j].resource_uri
-     }),
-
-     success: function(data) {
-     alert("tamam");
-     sonraki();
-     },
-     error: function (xhr, ajaxOptions, thrownError) {
-     alert(xhr.status);
-     alert(thrownError);
-     },
-     dataType: 'json'
-     });
-
-
-     });
-
-
-
-
-
-
-     });*/
 
 
 }
@@ -679,7 +574,7 @@ function request(url, successCallback, errorCallback) {
     $.ajax({
         type: "GET",
         url: url,
-        dataType: 'json',
+        dataType: 'jsonp',
         async: false,
         data: '{}',
         beforeSend: function (xhr) {
